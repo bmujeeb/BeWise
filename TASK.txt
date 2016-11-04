@@ -1,0 +1,52 @@
+Functionalities to be implemented:
+==================================
+
+- General:
+* Splash Screen
+* Allow user to add income and expense categories.
+* There should be a projection tab as well where user can, project savings based on current budgets, salaries and recurring items.
+* Add meaningful comments to the code. (low)
+
+
+- Overview Fragment:
+* Rework on budget overview stuff
+
+
+- Transactions detail dialog UI modification:
+* (Bug) Crash on orientation change.
+
+
+- Transactions add dialog UI modification:
+* (Bug) Crash on orientation change.
+
+
+- Budget: (High)
+* Dialog update
+* Show recurring period for each budget.
+* Graph of budgets and compare it (Low)
+* Shows the budgets along with the amount allocated and amount used.
+* Upon clicking the budget, it will show the transactions associated with the budget depending on the time.
+* To edit or delete budget, add buttons to the list view to delete or to edit.
+* Default budget time is one month and there is NO NONE option.
+* Test the dialog for insert and edit scenario.
+* Delete budget scenario.
+* Increase size of title.
+* Change background of title.
+
+
+- Search: (High)
+* HEAVY TESTING of search is required
+
+
+- Settings: (High)
+* In settings add currency options.
+* Database backup and restore.
+
+
+- Password:
+
+
+- Privacy Statement:
+
+
+- Help:

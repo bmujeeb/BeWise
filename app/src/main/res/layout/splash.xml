@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/SplashBackground"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
+        android:paddingBottom="10dp"
+        android:src="@drawable/blue_owl" />
+
+    <TextView
+        android:id="@+id/app_logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="10dp"
+        android:text="@string/app_name"
+        android:textColor="#FFFFFFFF"
+        android:textSize="35sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="10dp"
+        android:text="@string/app_slogan"
+        android:textColor="#FFFFFFFF"
+        android:textSize="25sp" />
+
+    <ProgressBar
+        style="@style/GenericProgressIndicator"
+        android:layout_gravity="center|bottom" />
+
+</LinearLayout>

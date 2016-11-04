@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BeWise</string>
+    <string name="app_slogan">Manage your finances</string>
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
+    <string name="label_recurring_transactions">Recurring Transactions</string>
+    <string name="label_searched_transactions">Searched Transactions</string>
+    <string name="label_budgets">Budgets</string>
+    <string name="label_pending_transactions">Pending Transactions</string>
+    <string name="settings">Settings</string>
+    <string name="label_privacy_statement">Privacy Statement</string>
+    <string name="debug">Debug View</string>
+    <string name="quit">Quit</string>
+    <string name="due_date">Due Date</string>
+    <string name="amount">Amount</string>
+    <string name="default_amount">0.00</string>
+    <string name="category">Category</string>
+    <string name="description">Description</string>
+    <string name="budget">Budget</string>
+    <string name="modify_reason">Modify Reason</string>
+    <string name="recurring">Recurring</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="label_start_date">Start Date</string>
+    <string name="label_end_date">End Date</string>
+    <string name="account_now">Account Now</string>
+    <string name="button_ok">OK</string>
+    <string name="button_next">Next</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_close">Close</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="label_settings">Settings</string>
+    <string name="label_help">Help</string>
+    <string name="balance_amount_text">Current Balance: </string>
+    <string name="label_date">Date</string>
+    <string name="label_due_date">Due Date</string>
+    <string name="label_last_billed_date">Billed Date</string>
+    <string name="label_category">Category</string>
+    <string name="label_amount">Amount</string>
+    <string name="label_name">Name</string>
+    <string name="label_description">Description</string>
+    <string name="label_recurring_period">Recurring Period</string>
+    <string name="label_edit">Edit</string>
+    <string name="label_delete">Delete</string>
+    <string name="label_amount_allocated">Amount</string>
+    <string name="label_amount_utilized">Utilized</string>
+    <string name="label_budget">Budget</string>
+    <string name="label_income">Income</string>
+    <string name="label_expense">Expense</string>
+    <string name="label_overview">Financial Overview</string>
+    <string name="label_income_trends">Income Trends</string>
+    <string name="label_expense_trends">Expense Trends</string>
+    <string name="label_last_7_days">7 Days</string>
+    <string name="label_last_one_month">30 Days</string>
+    <string name="label_all_transactions">All</string>
+    <string name="label_running_budgets">Running Budgets</string>
+    <string name="label_transactions">Actual Transactions</string>
+    <string name="label_budget_allocations">Allocations</string>
+    <string name="label_search">Search</string>
+    <string name="label_from">From</string>
+    <string name="label_to">To</string>
+    <string name="label_search_string">Search String</string>
+    <string name="label_min_amount">Min</string>
+    <string name="label_max_amount">Max</string>
+    <string name="label_currencies">Currencies</string>
+    <string name="label_advance_settings">Advance Options</string>
+    <string name="label_file">File</string>
+    <string name="label_database_backup">Database Backup</string>
+    <string name="label_database_restore">Database Restore</string>
+    <string name="label_set_application_password">Set Password</string>
+    <string name="label_clear_password">Clear Password</string>
+    <string name="privacy_statement_string"><![CDATA[<b>BeWise comes with ABSOLUTELY NO WARRANTY, the publisher will not be responsible for the loss of private information and the Android or Android enabled device.<br /> Please uninstall the application, If you don\'t agree with the terms of Privacy Statement. </b><br /><br />BeWise is a personal finance management application, which allow users to store, modify and view incomes and expenses of different categories.<br />Since this application requires user to give her/her private financial information, it is important for us, the development team, to inform the users their rights and how their private information is handled.<br /><br />1. Application requires no extra or special permissions like accessing your private information, contacts, sms, pictures, videos, network traffic, chats, social media profiles or any private information.<br />2. Users private information is not accessible to the development team and hence cannot be shared by/to anyone.<br />3. The application is password protected and it is advisable enable the password option.<br />4. The application provides the facility to create and restore database backup. To keep your data safe please create frequent backups of the database.<br /><br />You can send your suggestions, questions and bugs at app.instance@gmail.com.]]></string>
+    <string name="help_string"><![CDATA[BeWise is a personal finance management application, which allows user to store, modify and view incomes and expenses of different categories.<br />Following functionalities are provided by this editor:<br /><br />1. Rotate Image.<br />2. Change Brightness Contrast.<br />3. Color to Gray.<br />4. Blur Image.<br />5. Sharpen Image.<br />6. Image Edge.<br />7. Invert Image.<br />8. Save Image.<br /><br />User can capture image from Camera using Camera button or select an image from file browser using Image button. Selecting an image will automatically open the image in the editor view. User can select different options mentioned above to manipulate image and can save it on sdcard. This editor creates a new directory "smartedit" on sdcard, where user can save the images.<br />All the selected and saved images are displayed on the main screen as selection history and are selectable.<br /><br />You can send your suggestions, questions and bugs at app.instance@gmail.com.]]></string>
+
+    <string-array name="recurrence_period">
+        <item>NONE</item>
+        <item>DAY</item>
+        <item>WEEK</item>
+        <item>MONTH</item>
+        <item>QUARTER</item>
+        <item>HALF YEAR</item>
+        <item>YEAR</item>
+    </string-array>
+    <string-array name="income_categories">
+        <item>Salary</item>
+        <item>Stocks</item>
+        <item>Bonus</item>
+        <item>Credit</item>
+        <item>Sales</item>
+        <item>Gift</item>
+        <item>Real Estate</item>
+        <item>Pension</item>
+        <item>Store Credit</item>
+        <item>Tax Refund</item>
+        <item>Store Refund</item>
+        <item>Reimbursements</item>
+        <item>Insurance Claim</item>
+        <item>Disability Benefits</item>
+        <item>Disaster Relief Benefits</item>
+        <item>Cash Rebates</item>
+        <item>Scholarship/FellowShip</item>
+        <item>Child Support</item>
+        <item>Unemployment Benefits</item>
+        <item>Other Incomes</item>
+    </string-array>
+    <string-array name="expense_categories">
+        <item>Rent</item>
+        <item>Car Insurance</item>
+        <item>Health Insurance</item>
+        <item>House Insurance</item>
+        <item>Life Insurance</item>
+        <item>Property Insurance</item>
+        <item>Traffic Ticket</item>
+        <item>Fines</item>
+        <item>Utility Bills</item>
+        <item>Grocery</item>
+        <item>Restaurants/Eat-Outs</item>
+        <item>Electronics</item>
+        <item>Credit Installment</item>
+        <item>House Repair</item>
+        <item>Car Repair</item>
+        <item>Car Expenses</item>
+        <item>Cash Withdraw</item>
+        <item>Shopping</item>
+        <item>Charity/Donations</item>
+        <item>Moving costs</item>
+        <item>Business Expenses</item>
+        <item>Advertisement Expenses</item>
+        <item>Tuition Fee</item>
+        <item>Child Care</item>
+        <item>Other Expenses</item>
+    </string-array>
+    <string-array name="search_categories">
+        <item>Incomes and Expenses</item>
+        <item>Incomes</item>
+        <item>Expenses</item>
+        <item>Budgets</item>
+        <item>Pending</item>
+        <item>Recurring</item>
+    </string-array>
+    <string-array name="table_names">
+        <item>transactions</item>
+        <item>recurrence</item>
+        <item>budget</item>
+        <item>database</item>
+    </string-array>
+    <string-array name="currencies">
+        <item>$</item>
+        <item>€</item>
+        <item>£</item>
+        <item>¥</item>
+    </string-array>
+
+</resources>

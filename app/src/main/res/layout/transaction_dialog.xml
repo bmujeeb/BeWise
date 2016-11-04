@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TransactionAddDialogLabelStyle"
+                android:text="@string/amount" />
+
+            <EditText
+                android:id="@+id/transaction_amount"
+                style="@style/TransactionAddDialogValueStyle"
+                android:inputType="numberDecimal"
+                android:text="@string/default_amount" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TransactionAddDialogLabelStyle"
+                android:text="@string/category" />
+
+            <Spinner
+                android:id="@+id/transaction_category"
+                style="@style/TransactionAddDialogValueStyle"
+                android:textColor="@color/Black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TransactionAddDialogLabelStyle"
+                android:text="@string/description" />
+
+            <EditText
+                android:id="@+id/transaction_description"
+                style="@style/TransactionAddDialogValueStyle"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TransactionAddDialogLabelStyle"
+                android:text="@string/budget" />
+
+            <Spinner
+                android:id="@+id/transaction_budget"
+                style="@style/TransactionAddDialogValueStyle"
+                android:textColor="@color/Black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TransactionAddDialogLabelStyle"
+                android:text="@string/modify_reason" />
+
+            <EditText
+                android:id="@+id/transaction_edit_reason"
+                style="@style/TransactionAddDialogValueStyle"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recurrence_period_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TransactionAddDialogLabelStyle"
+                android:text="@string/label_recurring_period" />
+
+            <Spinner
+                android:id="@+id/recurring_period"
+                style="@style/TransactionAddDialogValueStyle"
+                android:textColor="@color/Black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/start_recurring_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TransactionAddDialogLabelStyle"
+                android:text="@string/label_start_date" />
+
+            <EditText
+                android:id="@+id/start_recurring_date"
+                style="@style/TransactionAddDialogValueStyle"
+                android:focusable="false"
+                android:inputType="date" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/button_cancel" />
+
+            <Button
+                android:id="@+id/ok_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/button_ok" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
