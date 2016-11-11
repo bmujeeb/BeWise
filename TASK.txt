@@ -14,24 +14,27 @@ Functionalities to be implemented:
 
 - Transactions detail dialog UI modification:
 * (Bug) Crash on orientation change.
+#FIXED - DialogFragment orientation change causing crash which is fixed
 
 
 - Transactions add dialog UI modification:
-* (Bug) Crash on orientation change.
+* (BUG) Crash on orientation change. 
+#FIXED - DialogFragment orientation change causing crash which is fixed
+
 
 
 - Budget: (High)
 * Dialog update
-* Show recurring period for each budget.
-* Graph of budgets and compare it (Low)
-* Shows the budgets along with the amount allocated and amount used.
-* Upon clicking the budget, it will show the transactions associated with the budget depending on the time.
+* (--DONE--) Show recurring period for each budget. 
+* (--DONE--) Shows the budgets along with the amount allocated and amount used. 
+* (--DONE--) Upon clicking the budget, it will show the transactions associated with the budget depending on the time.
 * To edit or delete budget, add buttons to the list view to delete or to edit.
 * Default budget time is one month and there is NO NONE option.
 * Test the dialog for insert and edit scenario.
 * Delete budget scenario.
 * Increase size of title.
 * Change background of title.
+* Graph of budgets and compare it (Low)
 
 
 - Search: (High)
@@ -44,9 +47,10 @@ Functionalities to be implemented:
 
 
 - Password:
-
+#TODO
 
 - Privacy Statement:
-
+#TODO
 
 - Help:
+#TODO

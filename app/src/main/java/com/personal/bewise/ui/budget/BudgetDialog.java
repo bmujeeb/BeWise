@@ -61,6 +61,10 @@ public class BudgetDialog extends DialogFragment implements OnClickListener {
 
     private BeWiseDatePicker _datePickerDialog;
 
+    public BudgetDialog() {
+
+    }
+
     /**
      * @param handler
      * @param dialogTitle

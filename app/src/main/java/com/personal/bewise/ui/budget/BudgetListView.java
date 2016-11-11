@@ -23,10 +23,13 @@ import java.util.List;
 
 public class BudgetListView extends ArrayAdapter<BudgetData> {
 
+    /** Layout Inflator  */
     private LayoutInflater _layoutInflater;
+    /**    */
     private List<BudgetData> _transactions;
+    /**    */
     private int _viewResourceId;
-
+    /**    */
     private CustomListFragment _parentFragment;
 
     /**
@@ -69,6 +72,7 @@ public class BudgetListView extends ArrayAdapter<BudgetData> {
             vh.date = (TextView) convertView.findViewById(R.id.date);
             vh.amountAllocated = (TextView) convertView.findViewById(R.id.amount);
             vh.amountUtilized = (TextView) convertView.findViewById(R.id.amount_utilized);
+            vh.recurringPeriod = (TextView) convertView.findViewById(R.id.recurring_period);
             vh.itemsSelectCheckBox = (CheckBox) convertView.findViewById(R.id.items_select_checkbox);
             vh.itemsSelectCheckBox.setOnCheckedChangeListener(new FragmentCheckboxListener(_parentFragment, position));
             convertView.setTag(vh);
@@ -85,6 +89,7 @@ public class BudgetListView extends ArrayAdapter<BudgetData> {
         double utilizedAmount = td.getBudgetUtilizedAmount(budget.getBudgetName(), budget.getBudgetRecurrencePeriod(), budget.getBudgetStartDate(),
                 DateUtilities.getCurrentDate());
         vh.amountUtilized.setText(Double.toString(utilizedAmount));
+        vh.recurringPeriod.setText(budget.getBudgetRecurrencePeriod());
 
         return convertView;
     }
@@ -94,6 +99,7 @@ public class BudgetListView extends ArrayAdapter<BudgetData> {
         TextView date;
         TextView amountAllocated;
         TextView amountUtilized;
+        TextView recurringPeriod;
         CheckBox itemsSelectCheckBox;
     }
 }
