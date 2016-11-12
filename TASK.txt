@@ -24,12 +24,15 @@ Functionalities to be implemented:
 
 
 - Budget: (High)
-* Dialog update
+* Add/Edit budget dialog update
+* (--DONE--) CRASH - BUG: Orientation change of Add/Edit budget dialog crashes it.
+Root cause: application context got from getActivity was null for DB operation as well as listview creation
+Solution: In onActivityCreate(...) initial global application context is saved and is passed to DB and listView to avoid crash on orientation change. 
 * (--DONE--) Show recurring period for each budget. 
 * (--DONE--) Shows the budgets along with the amount allocated and amount used. 
 * (--DONE--) Upon clicking the budget, it will show the transactions associated with the budget depending on the time.
-* To edit or delete budget, add buttons to the list view to delete or to edit.
-* Default budget time is one month and there is NO NONE option.
+* (--DONE--) Delete & Edit budget
+* (--DONE--) Default budget time is one month and there is NO NONE option.
 * Test the dialog for insert and edit scenario.
 * Delete budget scenario.
 * Increase size of title.

@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.budget;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +21,7 @@ import com.personal.bewise.ui.CustomListFragment;
 import com.personal.bewise.ui.transactions.TransactionsListView;
 import com.personal.bewise.utils.DateUtilities;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -48,18 +50,30 @@ public class BudgetFragment extends CustomListFragment {
 
     private int _selectedItem = 0;
 
+    private Context _context;
+
+    BudgetTable _budgetTable;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(this.getClass().toString(), "onCreateView(LayoutInflater...: View created.");
         View view = inflater.inflate(R.layout.budget, container, false);
+
+
 
         _addBudgetButton = (ImageButton) view.findViewById(R.id.add_budget_button);
         _addBudgetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                BudgetDialog editNameDialog = new BudgetDialog(new DialogDismisselHandler(), "Add Budget",
-                        "NEW", null);
+                BudgetDialog editNameDialog = new BudgetDialog();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("HANDLER", new DialogDismisselHandler());
+                bundle.putString("DIALOG_TITLE", "Add Budget");
+                bundle.putString("DIALOG_MODE", "NEW");
+                bundle.putSerializable("BUDGET", null);
+                editNameDialog.setArguments(bundle);
                 editNameDialog.show(fm, "add_budget_dialog");
             }
         });
@@ -69,8 +83,13 @@ public class BudgetFragment extends CustomListFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                BudgetDialog editNameDialog = new BudgetDialog(new DialogDismisselHandler(), "Edit Budget",
-                        "EDIT", _budgetsList.get(_selectedItem));
+                BudgetDialog editNameDialog = new BudgetDialog();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("HANDLER", new DialogDismisselHandler());
+                bundle.putSerializable("DIALOG_TITLE", "Edit Budget");
+                bundle.putSerializable("DIALOG_MODE", "EDIT");
+                bundle.putSerializable("BUDGET", _budgetsList.get(_selectedItem));
+                editNameDialog.setArguments(bundle);
                 editNameDialog.show(fm, "add_budget_dialog");
             }
         });
@@ -80,7 +99,7 @@ public class BudgetFragment extends CustomListFragment {
         _deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BudgetTable budgetTable = new BudgetTable(getActivity());
+                BudgetTable budgetTable = new BudgetTable(_context);
                 Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
                 while (iterator.hasNext()) {
                     Map.Entry<Integer, Boolean> item = iterator.next();
@@ -98,7 +117,10 @@ public class BudgetFragment extends CustomListFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.d(this.getClass().toString(), "onActivityCreated(Bundle...: Activity created.");
         super.onActivityCreated(savedInstanceState);
+        _context = getActivity();
+        _budgetTable = new BudgetTable(_context);
         updateActivity();
     }
 
@@ -109,7 +131,7 @@ public class BudgetFragment extends CustomListFragment {
         // in between
         String budgetName = _budgetsList.get(position).getBudgetName();
         String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
-        TransactionsTable transactionsTable = new TransactionsTable(getActivity());
+        TransactionsTable transactionsTable = new TransactionsTable(_context);
 
         List<TransactionsData> budgets = transactionsTable.getTransactionsInBudget(budgetName,
                 budRecurringPeriod, _budgetsList.get(position).getBudgetDate(),
@@ -125,12 +147,10 @@ public class BudgetFragment extends CustomListFragment {
     private void updateActivity() {
         // TODO: calculate the budget utilization here and send it to listview
         _checkState = new HashMap<Integer, Boolean>();
-        BudgetTable budgetTable = new BudgetTable(getActivity());
-        _budgetsList = budgetTable.getAllBudgets();
-        _budgetListView = new BudgetListView(getActivity(), R.layout.budget_out, _budgetsList,
+        _budgetsList = _budgetTable.getAllBudgets();
+        _budgetListView = new BudgetListView(_context, R.layout.budget_out, _budgetsList,
                 this);
         setListAdapter(_budgetListView);
-
     }
 
     /**
@@ -159,11 +179,15 @@ public class BudgetFragment extends CustomListFragment {
 
     @Override
     public void onResume() {
+        //TODO: FIXIT
         Log.d(this.getClass().toString(), "Back button called.");
         super.onResume();
     }
 
-    private class DialogDismisselHandler extends Handler {
+    private class DialogDismisselHandler extends Handler implements Serializable {
+
+        private static final long serialVersionUID = -7708712287964495953L;
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

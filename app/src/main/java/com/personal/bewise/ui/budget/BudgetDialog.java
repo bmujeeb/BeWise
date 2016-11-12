@@ -61,27 +61,23 @@ public class BudgetDialog extends DialogFragment implements OnClickListener {
 
     private BeWiseDatePicker _datePickerDialog;
 
+    private Bundle bundle;
+
     public BudgetDialog() {
 
-    }
-
-    /**
-     * @param handler
-     * @param dialogTitle
-     * @param dialogMode
-     * @param budget
-     */
-    public BudgetDialog(Handler handler, String dialogTitle, String dialogMode, BudgetData budget) {
-        this._dialogTitle = dialogTitle;
-        this._budgetData = budget;
-        this._handler = handler;
-        this._dialogMode = dialogMode;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.budget_dialog, container);
-        getDialog().setTitle(_dialogTitle);
+
+        bundle = getArguments();
+
+        getDialog().setTitle(bundle.getString("DIALOG_TITLE"));
+        this._budgetData = (BudgetData)bundle.getSerializable("BUDGET");
+        this._handler = (Handler) bundle.getSerializable("HANDLER");
+        this._dialogMode = bundle.getString("DIALOG_MODE");
+
 
         _budgetName = (EditText) view.findViewById(R.id.budget_name);
         createBudgetDateControl(view);
@@ -114,8 +110,9 @@ public class BudgetDialog extends DialogFragment implements OnClickListener {
      */
     private void createRecurrencePeriod(final View view) {
         _budgetRecurringPeriod = (Spinner) view.findViewById(R.id.budget_recurring_period);
-        _adapter = ArrayAdapter.createFromResource(getActivity(), R.array.recurrence_period, android.R.layout.simple_spinner_item);
+        _adapter = ArrayAdapter.createFromResource(getActivity(), R.array.budget_recurrence_period, android.R.layout.simple_spinner_item);
         _budgetRecurringPeriod.setAdapter(_adapter);
+        _budgetRecurringPeriod.setSelection(2);
     }
 
     /**

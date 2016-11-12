@@ -85,6 +85,14 @@
         <item>HALF YEAR</item>
         <item>YEAR</item>
     </string-array>
+    <string-array name="budget_recurrence_period">
+        <item>DAY</item>
+        <item>WEEK</item>
+        <item>MONTH</item>
+        <item>QUARTER</item>
+        <item>HALF YEAR</item>
+        <item>YEAR</item>
+    </string-array>
     <string-array name="income_categories">
         <item>Salary</item>
         <item>Stocks</item>

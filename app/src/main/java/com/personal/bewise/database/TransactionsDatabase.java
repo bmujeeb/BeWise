@@ -9,6 +9,9 @@ public abstract class TransactionsDatabase extends SQLiteOpenHelper {
      * Database name.
      */
     public static final String APPLICATION_DB_NAME = "transactionsDatabase.db";
+    /**
+     *
+     */
     public static final String APPLICATION_DB_LOCATION = "//data//data//com.personal.bewise//databases";
     /**
      * Database version.
