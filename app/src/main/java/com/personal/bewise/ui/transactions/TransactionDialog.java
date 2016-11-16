@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.transactions;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -65,6 +66,7 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
     private Button _okButton;
     private Button _cancelButton;
     private Handler _handler;
+    private Context _context;
 
     private BeWiseDatePicker _datePickerDialog;
 
@@ -75,29 +77,19 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
 
     }
 
-    /**
-     * @param handler
-     * @param dialogTitle
-     * @param dialogMode
-     * @param transaction
-     * @param isIncome
-     */
-    public TransactionDialog(Handler handler, String dialogTitle, String dialogMode,
-                             TransactionsData transaction, boolean isIncome) {
-        this.titleDialog = dialogTitle;
-        this.modeDialog = dialogMode;
-        this._transaction = transaction;
-        this._isIncome = isIncome;
-        this._handler = handler;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
         View view = inflater.inflate(R.layout.transaction_dialog, container);
-        getDialog().setTitle(titleDialog);
+        _context = getActivity();
 
+        Bundle args = getArguments();
+        this.titleDialog = args.getString("DIALOG_TITLE");
+        this.modeDialog = args.getString("DIALOG_MODE");
+        this._transaction = (TransactionsData) args.getSerializable("TRANSACTION_DATA");
+        this._isIncome = args.getBoolean("IS_INCOME");
+        this._handler = (Handler) args.getSerializable("HANDLER");
+
+        getDialog().setTitle(titleDialog);
         _currentDate = DateUtilities.getCurrentDate();
 
         createAmountLayout(view);
@@ -173,10 +165,10 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
     private void createCategoryLayout(final View view) {
         _categorySpinner = (Spinner) view.findViewById(R.id.transaction_category);
         if (_isIncome) {
-            _adapter = ArrayAdapter.createFromResource(getActivity(), R.array.income_categories,
+            _adapter = ArrayAdapter.createFromResource(_context, R.array.income_categories,
                     android.R.layout.simple_spinner_item);
         } else {
-            _adapter = ArrayAdapter.createFromResource(getActivity(), R.array.expense_categories,
+            _adapter = ArrayAdapter.createFromResource(_context, R.array.expense_categories,
                     android.R.layout.simple_spinner_item);
         }
         _categorySpinner.setAdapter(_adapter);
@@ -185,12 +177,12 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
     private void createBudgetLayout(View view) {
         _budgetSpinner = (Spinner) view.findViewById(R.id.transaction_budget);
 
-        BudgetTable budget = new BudgetTable(getActivity());
+        BudgetTable budget = new BudgetTable(_context);
         List<String> budgetsList = budget.getBudgetsList();
 
         budgetsList.add(0, BeWiseConstants.NONE);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(_context,
                 android.R.layout.simple_spinner_item, budgetsList);
 
         _budgetSpinner.setAdapter(dataAdapter);
@@ -212,10 +204,10 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
                 String budget = parentView.getItemAtPosition(position).toString();
                 if (!budget.equalsIgnoreCase("NONE")) {
 
-                    BudgetTable budgetTable = new BudgetTable(getActivity());
+                    BudgetTable budgetTable = new BudgetTable(_context);
                     BudgetData budgetData = budgetTable.getBudgetDetails(budget);
                     String budgetRecurrence = budgetData.getBudgetRecurrencePeriod();
-                    final ArrayAdapter adapter = new ArrayAdapter(getActivity(),
+                    final ArrayAdapter adapter = new ArrayAdapter(_context,
                             android.R.layout.simple_spinner_item,
                             RecurrencePeriod.getEnumBoundList(budgetRecurrence));
                     _recurringPeriodSpinner.setAdapter(adapter);
@@ -250,7 +242,7 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
      */
     private void createRecurrencePeriodLayout(final View view) {
         _recurringPeriodSpinner = (Spinner) view.findViewById(R.id.recurring_period);
-        final ArrayAdapter adapter = new ArrayAdapter(getActivity(),
+        final ArrayAdapter adapter = new ArrayAdapter(_context,
                 android.R.layout.simple_spinner_item, RecurrencePeriod.getEnumNames());
         _recurringPeriodSpinner.setAdapter(adapter);
     }
@@ -300,11 +292,11 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
                     transaction.setRecurring(_isRecurring);
                     transaction.setRecurringPeriod(recurrSpinner);
                     transaction.setStartDate(_startDateEditText.getText().toString());
-                    TransactionsTable transactionsTable = new TransactionsTable(getActivity());
+                    TransactionsTable transactionsTable = new TransactionsTable(_context);
                     if (!_isRecurring) {
                         if (DateUtilities.isAfterToday(transaction.getStartDate()) == -1) {
                             PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(
-                                    getActivity());
+                                    _context);
                             pendingTransactionsTable.addNewPendingTransaction(transaction);
                             transactionsTable.deleteSingleTransaction(transaction.getTransactionID());
                         } else {
@@ -332,6 +324,21 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         _handler.sendEmptyMessage(0);
+
+    }
+
+    /**
+     * onDestroyView:
+     *
+     * --IMPORTANT--
+     * It will avoid killing the dialog on orientation is changed.
+     */
+    @Override
+    public void onDestroyView() {
+        if (getDialog() != null && getRetainInstance()) {
+            getDialog().setDismissMessage(null);
+        }
+        super.onDestroyView();
     }
 
     /**
@@ -350,7 +357,7 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
         transaction.setIncome(_isIncome);
         double amount = Double.parseDouble(_amountEditText.getText().toString());
         if (amount <= 0) {
-            Toast.makeText(getActivity(), "Amount not acceptable", Toast.LENGTH_LONG).show();
+            Toast.makeText(_context, "Amount not acceptable", Toast.LENGTH_LONG).show();
             return;
         } else if (amount > 0 && !transaction.isIncome()) {
             amount *= -1;
@@ -372,7 +379,7 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
                 // If the start date is after today, Set next due date to
                 // start date, and only add to recurring transactions
                 transaction.setNextDueDate(transaction.getStartDate());
-                RecurrenceTable recurrenceTable = new RecurrenceTable(getActivity());
+                RecurrenceTable recurrenceTable = new RecurrenceTable(_context);
                 recurrenceTable.addNewRecurringItem(transaction);
             } else {
                 // Otherwise calculate the next due date
@@ -380,18 +387,18 @@ public class TransactionDialog extends DialogFragment implements OnClickListener
                         DateUtilities.getRecurrencePeriodAsInt(transaction.getRecurringPeriod())));
                 // Add transaction to both Recurrence and
                 // Transactions tables
-                RecurrenceTable recurrenceTable = new RecurrenceTable(getActivity());
+                RecurrenceTable recurrenceTable = new RecurrenceTable(_context);
                 recurrenceTable.addNewRecurringItem(transaction);
-                TransactionsTable transactionsTable = new TransactionsTable(getActivity());
+                TransactionsTable transactionsTable = new TransactionsTable(_context);
                 transactionsTable.addNewTransaction(transaction);
             }
         } else {
             if (DateUtilities.isAfterToday(transaction.getStartDate()) == -1) {
                 PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(
-                        getActivity());
+                        _context);
                 pendingTransactionsTable.addNewPendingTransaction(transaction);
             } else {
-                TransactionsTable transactionsTable = new TransactionsTable(getActivity());
+                TransactionsTable transactionsTable = new TransactionsTable(_context);
                 transactionsTable.addNewTransaction(transaction);
             }
         }

@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.transactions;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,25 +19,64 @@ import com.personal.bewise.ui.CustomListFragment;
 import com.personal.bewise.ui.details.TransactionDetailsDialog;
 import com.personal.bewise.utils.TransactionDetailsMode;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Bilal Mujeeb
+ */
+
 public class TransactionsFragment extends CustomListFragment {
-
+    /**
+     * Add new income button.
+     */
     private ImageButton _addIncomeButton;
+    /**
+     * Add new expense button.
+     */
     private ImageButton _addExpenseButton;
+    /**
+     * Edit income or expense button.
+     */
     private ImageButton _editButton;
+    /**
+     * Delete income or expense button.
+     */
     private ImageButton _deleteButton;
+    /**
+     * Index of selected item in the list.
+     */
     private int _selectedItem = 0;
+    /**
+     * List containing transactions data..
+     */
     private List<TransactionsData> _transactionsList;
+    /**
+     * Map indicating which item in the UI is selected for delete (one or more selection) or edit (single item).
+     */
     private Map<Integer, Boolean> _checkState;
+    /**
+     * Application context.
+     */
+    private Context _context;
 
+    /**
+     * Default constructor.
+     */
     public TransactionsFragment() {
 
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.transactions, container, false);
@@ -47,12 +87,19 @@ public class TransactionsFragment extends CustomListFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
+
                 TransactionsData data = _transactionsList.get(_selectedItem);
-                boolean isIncome = data.isIncome();
-                String title = isIncome ? BeWiseConstants.EDIT_INCOME : BeWiseConstants.EDIT_EXPENSE;
-                // TODO: Use bundle pass the arguments instead of passing it to constructor which destroys
-                // TODO: the object when orientation is changed
-                TransactionDialog editNameDialog = new TransactionDialog(new DialogDismissalHandler(), title, BeWiseConstants.EDIT_DIALOG_MODE, data, isIncome);
+                Boolean isIncome = data.isIncome();
+
+                TransactionDialog editNameDialog = new TransactionDialog();
+                Bundle args = new Bundle();
+                args.putSerializable("HANDLER", new DialogDismissalHandler());
+                args.putString("DIALOG_TITLE", isIncome ? BeWiseConstants.EDIT_INCOME : BeWiseConstants.EDIT_EXPENSE);
+                args.putString("DIALOG_MODE", BeWiseConstants.EDIT_DIALOG_MODE);
+                args.putSerializable("TRANSACTION_DATA", data);
+                args.putBoolean("IS_INCOME", isIncome);
+                editNameDialog.setArguments(args);
+
                 editNameDialog.show(fm, BeWiseConstants.ADD_TRANSACTION_DIALOG_TAG);
             }
         });
@@ -62,7 +109,7 @@ public class TransactionsFragment extends CustomListFragment {
         _deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TransactionsTable transactionsTable = new TransactionsTable(getActivity());
+                TransactionsTable transactionsTable = new TransactionsTable(_context);
 
                 Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
                 while (iterator.hasNext()) {
@@ -83,8 +130,14 @@ public class TransactionsFragment extends CustomListFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                TransactionDialog editNameDialog = new TransactionDialog(new DialogDismissalHandler(), BeWiseConstants.ADD_INCOME,
-                        BeWiseConstants.NEW_DIALOG_MODE, null, true);
+                TransactionDialog editNameDialog = new TransactionDialog();
+                Bundle args = new Bundle();
+                args.putSerializable("HANDLER", new DialogDismissalHandler());
+                args.putString("DIALOG_TITLE", BeWiseConstants.ADD_INCOME);
+                args.putString("DIALOG_MODE", BeWiseConstants.NEW_DIALOG_MODE);
+                args.putSerializable("TRANSACTION_DATA", null);
+                args.putBoolean("IS_INCOME", true);
+                editNameDialog.setArguments(args);
                 editNameDialog.show(fm, BeWiseConstants.ADD_INCOME_DIALOG_TAG);
             }
         });
@@ -94,20 +147,38 @@ public class TransactionsFragment extends CustomListFragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
-                TransactionDialog editNameDialog = new TransactionDialog(new DialogDismissalHandler(), BeWiseConstants.ADD_EXPENSE,
-                        BeWiseConstants.NEW_DIALOG_MODE, null, false);
+                TransactionDialog editNameDialog = new TransactionDialog();
+                Bundle args = new Bundle();
+                args.putSerializable("HANDLER", new DialogDismissalHandler());
+                args.putString("DIALOG_TITLE", BeWiseConstants.ADD_EXPENSE);
+                args.putString("DIALOG_MODE", BeWiseConstants.NEW_DIALOG_MODE);
+                args.putSerializable("TRANSACTION_DATA", null);
+                args.putBoolean("IS_INCOME", false);
+                editNameDialog.setArguments(args);
                 editNameDialog.show(fm, BeWiseConstants.ADD_EXPENSE_DIALOG_TAG);
             }
         });
         return view;
     }
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        this._context = getActivity();
         updateActivity();
     }
 
+    /**
+     *
+     * @param l
+     * @param v
+     * @param position
+     * @param id
+     */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -129,11 +200,13 @@ public class TransactionsFragment extends CustomListFragment {
 
     }
 
-    /** */
+    /**
+     * Update activity.
+     */
     private void updateActivity() {
         _checkState = new HashMap<Integer, Boolean>();
         _transactionsList = getAllTransactions();
-        setListAdapter(new TransactionsListView(getActivity(), R.layout.transactions_out, _transactionsList, this));
+        setListAdapter(new TransactionsListView(_context, R.layout.transactions_out, _transactionsList, this));
     }
 
     /**
@@ -142,10 +215,15 @@ public class TransactionsFragment extends CustomListFragment {
      * @return
      */
     private List<TransactionsData> getAllTransactions() {
-        TransactionsTable transactionsTable = new TransactionsTable(getActivity());
+        TransactionsTable transactionsTable = new TransactionsTable(_context);
         return transactionsTable.getAllTransactions();
     }
 
+    /**
+     *
+     * @param itemId
+     * @param checkedState
+     */
     @Override
     public void setCheckBoxSelections(int itemId, boolean checkedState) {
         _selectedItem = itemId;
@@ -167,7 +245,20 @@ public class TransactionsFragment extends CustomListFragment {
         }
     }
 
-    private class DialogDismissalHandler extends Handler {
+    /**
+     *
+     */
+    private class DialogDismissalHandler extends Handler implements Serializable {
+
+        /**
+         * The constant UID.
+         */
+        private static final long serialVersionUID = 4616093033484240050L;
+
+        /**
+         *
+         * @param msg
+         */
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

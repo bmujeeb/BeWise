@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.budget;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -63,6 +64,8 @@ public class BudgetDialog extends DialogFragment implements OnClickListener {
 
     private Bundle bundle;
 
+    private Context _context;
+
     public BudgetDialog() {
 
     }
@@ -70,14 +73,12 @@ public class BudgetDialog extends DialogFragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         View view = inflater.inflate(R.layout.budget_dialog, container);
-
+        _context = getActivity();
         bundle = getArguments();
-
         getDialog().setTitle(bundle.getString("DIALOG_TITLE"));
         this._budgetData = (BudgetData)bundle.getSerializable("BUDGET");
         this._handler = (Handler) bundle.getSerializable("HANDLER");
         this._dialogMode = bundle.getString("DIALOG_MODE");
-
 
         _budgetName = (EditText) view.findViewById(R.id.budget_name);
         createBudgetDateControl(view);
@@ -126,7 +127,7 @@ public class BudgetDialog extends DialogFragment implements OnClickListener {
             @Override
             public void onClick(final View v) {
                 _budgetData = readBudgetUiItems();
-                BudgetTable budget = new BudgetTable(getActivity());
+                BudgetTable budget = new BudgetTable(_context);
                 if (_dialogMode.equalsIgnoreCase("edit")) {
                     budget.updateBudget(_budgetData);
                 } else {
@@ -186,6 +187,20 @@ public class BudgetDialog extends DialogFragment implements OnClickListener {
         if (_handler != null) {
             _handler.sendEmptyMessage(0);
         }
+    }
+
+    /**
+     * onDestroyView:
+     *
+     * --IMPORTANT--
+     * It will avoid killing the dialog on orientation is changed.
+     */
+    @Override
+    public void onDestroyView() {
+        if (getDialog() != null && getRetainInstance()) {
+            getDialog().setDismissMessage(null);
+        }
+        super.onDestroyView();
     }
 
     @Override

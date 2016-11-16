@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.pending;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +21,7 @@ import com.personal.bewise.ui.transactions.TransactionDialog;
 import com.personal.bewise.ui.transactions.TransactionsListView;
 import com.personal.bewise.utils.TransactionDetailsMode;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -44,6 +46,8 @@ public class PendingTransactionsFragment extends CustomListFragment {
     private Map<Integer, Boolean> _checkState;
     private List<TransactionsData> _transactions;
 
+    private Context _context;
+
     public PendingTransactionsFragment() {
         // TODO Auto-generated constructor stub
     }
@@ -57,13 +61,21 @@ public class PendingTransactionsFragment extends CustomListFragment {
         _editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Improve transactions dialog, with pending transactions edit mode.
+                /**
+                 * TODO: Improve transactions dialog, with pending transactions edit mode.
+                 */
                 FragmentManager fm = getFragmentManager();
                 TransactionsData data = _transactions.get(_selectedItem);
                 boolean isIncome = data.isIncome();
                 String title = isIncome ? BeWiseConstants.EDIT_INCOME : BeWiseConstants.EDIT_EXPENSE;
-                TransactionDialog editNameDialog = new TransactionDialog(new DialogDismissalHandler(), title,
-                        BeWiseConstants.EDIT_DIALOG_MODE, data, isIncome);
+                TransactionDialog editNameDialog = new TransactionDialog();
+                Bundle args = new Bundle();
+                args.putSerializable("HANDLER", new DialogDismissalHandler());
+                args.putString("DIALOG_TITLE", title);
+                args.putString("DIALOG_MODE", BeWiseConstants.EDIT_DIALOG_MODE);
+                args.putSerializable("TRANSACTION_DATA", data);
+                args.putBoolean("IS_INCOME", isIncome);
+                editNameDialog.setArguments(args);
                 editNameDialog.show(fm, BeWiseConstants.ADD_TRANSACTION_DIALOG_TAG);
             }
         });
@@ -76,7 +88,6 @@ public class PendingTransactionsFragment extends CustomListFragment {
                 PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(
                         getActivity());
                 Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
-
                 while (iterator.hasNext()) {
                     Map.Entry<Integer, Boolean> item = iterator.next();
                     TransactionsData data = _transactions.get(item.getKey());
@@ -96,6 +107,7 @@ public class PendingTransactionsFragment extends CustomListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        _context = getActivity();
         updateActivity();
     }
 
@@ -115,10 +127,10 @@ public class PendingTransactionsFragment extends CustomListFragment {
     /** */
     private void updateActivity() {
         _checkState = new HashMap<Integer, Boolean>();
-        PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(getActivity());
+        PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(_context);
         _transactions = pendingTransactionsTable.getAllPendingTransactions();
         setListAdapter(
-                new TransactionsListView(getActivity(), R.layout.transactions_out, _transactions, this));
+                new TransactionsListView(_context, R.layout.transactions_out, _transactions, this));
     }
 
     @Override
@@ -143,7 +155,10 @@ public class PendingTransactionsFragment extends CustomListFragment {
 
     }
 
-    private class DialogDismissalHandler extends Handler {
+    private class DialogDismissalHandler extends Handler implements Serializable {
+
+        private static final long serialVersionUID = -1038633200461253851L;
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

@@ -59,9 +59,6 @@ public class BudgetFragment extends CustomListFragment {
                              Bundle savedInstanceState) {
         Log.d(this.getClass().toString(), "onCreateView(LayoutInflater...: View created.");
         View view = inflater.inflate(R.layout.budget, container, false);
-
-
-
         _addBudgetButton = (ImageButton) view.findViewById(R.id.add_budget_button);
         _addBudgetButton.setOnClickListener(new View.OnClickListener() {
             @Override
