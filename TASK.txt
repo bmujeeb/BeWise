@@ -2,28 +2,33 @@ Functionalities to be implemented:
 ==================================
 
 - General:
+----------
 * Splash Screen
 * Allow user to add income and expense categories.
 * There should be a projection tab as well where user can, project savings based on current budgets, salaries and recurring items.
 * Add meaningful comments to the code. (low)
+* Testing fragments & dialogs behavior with orientation change.
 
 
-- Overview Fragment:
+- Overview Fragments:
+----------------------
 * Rework on budget overview stuff
 
 
 - Transactions detail dialog UI modification:
+---------------------------------------------
 * (Bug) Crash on orientation change.
 #FIXED - DialogFragment orientation change causing crash which is fixed
 
 
 - Transactions add dialog UI modification:
+------------------------------------------
 * (BUG) Crash on orientation change. 
 #FIXED - DialogFragment orientation change causing crash which is fixed
 
 
-
-- Budget: (High)
+- Budget: (High):
+-----------------
 * Add/Edit budget dialog update
 * (--DONE--) CRASH - BUG: Orientation change of Add/Edit budget dialog crashes it.
 Root cause: application context got from getActivity was null for DB operation as well as listview creation
@@ -41,19 +46,26 @@ Solution: In onActivityCreate(...) initial global application context is saved a
 
 
 - Search: (High)
+----------------
 * HEAVY TESTING of search is required
 
 
 - Settings: (High)
+-------------------
 * In settings add currency options.
 * Database backup and restore.
 
 
 - Password:
+-----------
 #TODO
+
 
 - Privacy Statement:
+--------------------
 #TODO
 
+
 - Help:
+-------
 #TODO
