@@ -123,9 +123,9 @@ public class BudgetFragment extends CustomListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        Log.d(this.getClass().toString(), "onListItemClick(ListView l, View v, int position, long id) - Budget item selected.");
         super.onListItemClick(l, v, position, id);
-        // TODO: Get the start date of the budget and calculate the transactions
-        // in between
+        // TODO: Get the start date of the budget and calculate the transactions in between
         String budgetName = _budgetsList.get(position).getBudgetName();
         String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
         TransactionsTable transactionsTable = new TransactionsTable(_context);
@@ -182,7 +182,6 @@ public class BudgetFragment extends CustomListFragment {
     }
 
     private class DialogDismisselHandler extends Handler implements Serializable {
-
         private static final long serialVersionUID = -7708712287964495953L;
 
         @Override

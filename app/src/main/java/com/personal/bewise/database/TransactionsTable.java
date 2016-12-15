@@ -349,6 +349,7 @@ public class TransactionsTable extends TransactionItemsTable {
      * @return List of transactions as TransactionData in the given budget.
      */
     public List<TransactionsData> getTransactionsInBudget(String budgetName, String recurringPeriod, String startDate, String endDate) {
+        Log.d(this.getClass().toString(), "getTransactionsInBudget(String " + budgetName + ", String " + recurringPeriod + ", String " + startDate + ", String " + endDate + ")");
         SQLiteDatabase db = this.getWritableDatabase();
 
         String selectQuery = "SELECT * FROM " + TRANSACTION_TABLE;

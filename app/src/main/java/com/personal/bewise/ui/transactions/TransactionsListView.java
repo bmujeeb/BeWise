@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.transactions;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class TransactionsListView extends ArrayAdapter<TransactionsData> {
 
     public TransactionsListView(Context context, int textViewResourceId, List<TransactionsData> transactions, CustomListFragment parent) {
         super(context, textViewResourceId, transactions);
-
+        Log.d(this.getClass().toString(), "TransactionsListView(....");
         this._transactions = transactions;
         this._viewResourceId = textViewResourceId;
         this._parent = parent;
