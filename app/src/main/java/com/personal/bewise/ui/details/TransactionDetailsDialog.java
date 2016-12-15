@@ -2,6 +2,7 @@ package com.personal.bewise.ui.details;
 
 import android.app.DialogFragment;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,9 +70,9 @@ public class TransactionDetailsDialog extends DialogFragment {
 
         _amount = (TextView) view.findViewById(R.id.transaction_amount);
         if (_transaction.isIncome()) {
-            _amount.setTextColor(Color.GREEN);
+            incomeDialogTheme();
         } else {
-            _amount.setTextColor(Color.RED);
+            expenseDialogTheme();
         }
         _amount.setText(Double.toString(_transaction.getAmount()));
 
@@ -109,6 +110,14 @@ public class TransactionDetailsDialog extends DialogFragment {
         }
 
         return view;
+    }
+
+    private void incomeDialogTheme() {
+        getDialog().getWindow().setTitleColor(getResources().getColor(R.color.Green));
+    }
+
+    private void expenseDialogTheme() {
+        getDialog().getWindow().setTitleColor(getResources().getColor(R.color.Red));
     }
 
     private void transactionControls() {

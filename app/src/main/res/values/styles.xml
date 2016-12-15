@@ -46,25 +46,28 @@
 
     <style name="TransactionAddDialogLabelStyle" parent="@style/TransactionsDialogStyle">
         <item name="android:textStyle">bold</item>
-        <item name="android:paddingLeft">5dip</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:paddingLeft">10dip</item>
         <item name="android:layout_weight">0.4</item>
     </style>
 
     <style name="TransactionAddDialogValueStyle" parent="@style/TransactionsDialogStyle">
         <item name="android:paddingRight">3dip</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:layout_weight">0.6</item>
     </style>
 
     <style name="TransactionDetailsDialogLabelStyle" parent="@style/TransactionsDialogStyle">
         <item name="android:textStyle">bold</item>
-        <item name="android:paddingLeft">5dip</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:paddingLeft">10dip</item>
         <item name="android:layout_weight">0.5</item>
     </style>
 
     <style name="TransactionDetailsDialogValueStyle" parent="@style/TransactionsDialogStyle">
-        <item name="android:layout_gravity">right</item>
-        <item name="android:paddingRight">5dip</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:layout_weight">0.5</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>
