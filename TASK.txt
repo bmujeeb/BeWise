@@ -29,7 +29,8 @@ Functionalities to be implemented:
 
 - Budget: (High):
 -----------------
-* (BUG) Clicking on list items in listview is getting data from main list. 
+* (--DONE--)(FIXED)(BUG) Clicking on list items in listview is getting data from main list. 
+	(FIX) state machine has been changed and now transaction details dialog opens.
 * Add/Edit budget dialog update
 * (--DONE--) CRASH - BUG: Orientation change of Add/Edit budget dialog crashes it.
 Root cause: application context got from getActivity was null for DB operation as well as listview creation
@@ -39,7 +40,7 @@ Solution: In onActivityCreate(...) initial global application context is saved a
 * (--DONE--) Upon clicking the budget, it will show the transactions associated with the budget depending on the time.
 * (--DONE--) Delete & Edit budget
 * (--DONE--) Default budget time is one month and there is NO NONE option.
-* Back button
+* (--Done--) Back button, open budget fragment
 * Test the dialog for insert and edit scenario.
 * Delete budget scenario.
 * Increase size of title.

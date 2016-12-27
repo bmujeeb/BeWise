@@ -87,7 +87,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
         }
 
     }

@@ -6,20 +6,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.personal.bewise.BeWiseConstants;
 import com.personal.bewise.R;
 import com.personal.bewise.database.BudgetData;
 import com.personal.bewise.database.BudgetTable;
 import com.personal.bewise.database.TransactionsData;
 import com.personal.bewise.database.TransactionsTable;
 import com.personal.bewise.ui.CustomListFragment;
+import com.personal.bewise.ui.details.TransactionDetailsDialog;
 import com.personal.bewise.ui.transactions.TransactionsListView;
 import com.personal.bewise.utils.DateUtilities;
+import com.personal.bewise.utils.TransactionDetailsMode;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -37,6 +41,8 @@ public class BudgetFragment extends CustomListFragment {
 
     /** */
     private List<BudgetData> _budgetsList;
+
+    private List<TransactionsData> _budgetTransaction;
 
     private Map<Integer, Boolean> _checkState;
 
@@ -125,20 +131,39 @@ public class BudgetFragment extends CustomListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         Log.d(this.getClass().toString(), "onListItemClick(ListView l, View v, int position, long id) - Budget item selected.");
         super.onListItemClick(l, v, position, id);
-        // TODO: Get the start date of the budget and calculate the transactions in between
-        String budgetName = _budgetsList.get(position).getBudgetName();
-        String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
-        TransactionsTable transactionsTable = new TransactionsTable(_context);
 
-        List<TransactionsData> budgets = transactionsTable.getTransactionsInBudget(budgetName,
-                budRecurringPeriod, _budgetsList.get(position).getBudgetDate(),
-                DateUtilities.getCurrentDate());
+        if(_transactionsListView == null) {
+            // A budget is selected and items related to the budget are available
+            String budgetName = _budgetsList.get(position).getBudgetName();
+            String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
+            TransactionsTable transactionsTable = new TransactionsTable(_context);
 
-        _transactionsListView = new TransactionsListView(getActivity(), R.layout.transactions_out, budgets, this);
+            _budgetTransaction = transactionsTable.getTransactionsInBudget(budgetName,
+                    budRecurringPeriod, _budgetsList.get(position).getBudgetDate(),
+                    DateUtilities.getCurrentDate());
 
-        setListAdapter(_transactionsListView);
-        _addBudgetButton.setEnabled(false);
-        _addBudgetButton.setVisibility(View.GONE);
+            _transactionsListView = new TransactionsListView(getActivity(), R.layout.transactions_out, _budgetTransaction, this);
+
+            setListAdapter(_transactionsListView);
+            _addBudgetButton.setEnabled(false);
+            _addBudgetButton.setVisibility(View.GONE);
+        } else {
+            // Otherwise open the TransactionDetailsDialog and show the transaction detail
+            FragmentManager fm = getFragmentManager();
+            TransactionsData transaction = _budgetTransaction.get(position);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("TRANSACTION", transaction);
+            TransactionDetailsDialog detailsDialog = new TransactionDetailsDialog();
+            if (transaction.isIncome()) {
+                bundle.putSerializable("MODE", TransactionDetailsMode.INCOME);
+                detailsDialog.setArguments(bundle);
+                detailsDialog.show(fm, BeWiseConstants.TRANSACTION_DETAILS_DIALOG_TAG);
+            } else {
+                bundle.putSerializable("MODE", TransactionDetailsMode.EXPENSE);
+                detailsDialog.setArguments(bundle);
+                detailsDialog.show(fm, BeWiseConstants.TRANSACTION_DETAILS_DIALOG_TAG);
+            }
+        }
     }
 
     private void updateActivity() {
@@ -176,9 +201,26 @@ public class BudgetFragment extends CustomListFragment {
 
     @Override
     public void onResume() {
-        //TODO: FIXIT
-        Log.d(this.getClass().toString(), "Back button called.");
         super.onResume();
+        Log.d(this.getClass().toString(), "onResume()");
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    Log.d(this.getClass().toString(), "onResume(): Back button pressed.");
+                    if(_transactionsListView != null){
+                        // move to budget fragment
+                        updateActivity();
+                        _transactionsListView = null;
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private class DialogDismisselHandler extends Handler implements Serializable {
