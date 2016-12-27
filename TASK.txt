@@ -18,23 +18,23 @@ Functionalities to be implemented:
 - Transactions detail dialog UI modification:
 ---------------------------------------------
 * (Bug) Crash on orientation change.
-#FIXED - DialogFragment orientation change causing crash which is fixed
+	#FIXED - DialogFragment orientation change causing crash which is fixed
 
 
 - Transactions add dialog UI modification:
 ------------------------------------------
 * (BUG) Crash on orientation change. 
-#FIXED - DialogFragment orientation change causing crash which is fixed
+	#FIXED - DialogFragment orientation change causing crash which is fixed
 
 
 - Budget: (High):
 -----------------
 * (--DONE--)(FIXED)(BUG) Clicking on list items in listview is getting data from main list. 
-	(FIX) state machine has been changed and now transaction details dialog opens.
+	#FIXED state machine has been changed and now transaction details dialog opens.
 * Add/Edit budget dialog update
 * (--DONE--) CRASH - BUG: Orientation change of Add/Edit budget dialog crashes it.
-Root cause: application context got from getActivity was null for DB operation as well as listview creation
-Solution: In onActivityCreate(...) initial global application context is saved and is passed to DB and listView to avoid crash on orientation change. 
+	Root cause: application context got from getActivity was null for DB operation as well as listview creation
+	Solution: In onActivityCreate(...) initial global application context is saved and is passed to DB and listView to avoid crash on orientation change. 
 * (--DONE--) Show recurring period for each budget. 
 * (--DONE--) Shows the budgets along with the amount allocated and amount used. 
 * (--DONE--) Upon clicking the budget, it will show the transactions associated with the budget depending on the time.
@@ -52,17 +52,14 @@ Solution: In onActivityCreate(...) initial global application context is saved a
 ----------------
 * HEAVY TESTING of search is required
 
-
 - Settings: (High)
 -------------------
 * In settings add currency options.
 * Database backup and restore.
 
-
 - Password:
 -----------
 #TODO
-
 
 - Privacy Statement:
 --------------------
