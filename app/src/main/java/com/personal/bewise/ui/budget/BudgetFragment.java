@@ -128,11 +128,25 @@ public class BudgetFragment extends CustomListFragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedState) {
+        super.onSaveInstanceState(savedState);
+    }
+
+    @Override
+    public void onCreate (Bundle savedState) {
+        // Restore the view on rotation change
+        super.onCreate(savedState);
+        if (savedState != null) {
+
+        }
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Log.d(this.getClass().toString(), "onListItemClick(ListView l, View v, int position, long id) - Budget item selected.");
         super.onListItemClick(l, v, position, id);
 
-        if(_transactionsListView == null) {
+        if (_transactionsListView == null) {
             // A budget is selected and items related to the budget are available
             String budgetName = _budgetsList.get(position).getBudgetName();
             String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
@@ -167,12 +181,15 @@ public class BudgetFragment extends CustomListFragment {
     }
 
     private void updateActivity() {
+        Log.d(this.getClass().toString(), "updateActivity()");
         // TODO: calculate the budget utilization here and send it to listview
+        Log.d(this.getClass().toString(), "updateActivity(): Budget ListView repopulated.");
         _checkState = new HashMap<Integer, Boolean>();
         _budgetsList = _budgetTable.getAllBudgets();
         _budgetListView = new BudgetListView(_context, R.layout.budget_out, _budgetsList,
                 this);
         setListAdapter(_budgetListView);
+
     }
 
     /**
@@ -208,13 +225,14 @@ public class BudgetFragment extends CustomListFragment {
         getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     Log.d(this.getClass().toString(), "onResume(): Back button pressed.");
-                    if(_transactionsListView != null){
+                    if (_transactionsListView != null) {
                         // move to budget fragment
-                        updateActivity();
+                        //TODO: check if setting the following variables is going to make any difference?
                         _transactionsListView = null;
+                        _budgetTransaction = null;
+                        updateActivity();
                     }
                     return true;
                 }
