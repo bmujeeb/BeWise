@@ -50,9 +50,11 @@ public class BudgetFragment extends CustomListFragment {
 
     private ImageButton _deleteButton;
 
-    private TransactionsListView _transactionsListView;
-
+    // Default listview when the budget fragment is created
     private BudgetListView _budgetListView;
+
+    // listview containing transactions in a listview
+    private TransactionsListView _transactionsListView;
 
     private int _selectedItem = 0;
 
