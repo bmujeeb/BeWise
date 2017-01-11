@@ -41,9 +41,13 @@ Functionalities to be implemented:
 * (--DONE--) Delete & Edit budget
 * (--DONE--) Default budget time is one month and there is NO NONE option.
 * (--Done--) Back button, open budget fragment
-* (BUG) When budget transactions are shown and orientation is changed, view moves to budgets list.
+* (--Done--) (BUG) When budget transactions are shown and orientation is changed, view moves to budgets list.
 * Test the dialog for insert and edit scenario.
 * Delete budget scenario.
+    Solutions: 
+        1. Delete only the budget and remove referece with each transaction associated with the budget.
+        2. Delete the transactions as well along with the budget.
+        3. Ask the user which option they want to avail.
 * Increase size of title.
 * Change background of title.
 * Graph of budgets and compare it (Low)

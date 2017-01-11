@@ -27,7 +27,6 @@ public class BudgetTable extends TransactionItemsTable {
     }
 
     /**
-     *
      * @param budget
      * @return
      */
@@ -148,6 +147,7 @@ public class BudgetTable extends TransactionItemsTable {
      * @param budgetName
      */
     public void deleteBudget(String budgetName) {
+        Log.d(BeWiseConstants.LOG_TAG, "deleteBudget(" + budgetName + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(BUDGET_TABLE, BUDGET_NAME + " = ?", new String[]{budgetName});
         db.close();

@@ -7,11 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.personal.bewise.BeWiseConstants;
+import com.personal.bewise.R;
 import com.personal.bewise.utils.DateUtilities;
 import com.personal.bewise.utils.NumberUtilities;
 import com.personal.bewise.utils.SearchableItems;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -259,6 +261,7 @@ public class TransactionsTable extends TransactionItemsTable {
         }
         db.close();
         cursor.close();
+        Collections.reverse(transactionsList);
         return transactionsList;
     }
 
