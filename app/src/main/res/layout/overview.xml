@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -8,10 +9,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/LightGrey"
+        android:background="@color/Salmon"
         android:gravity="center_horizontal"
         android:text="@string/label_overview"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -25,17 +26,18 @@
             android:layout_weight="0.35"
             android:paddingLeft="5dip"
             android:text="@string/balance_amount_text"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/balance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.65"
-            android:gravity="right"
+            android:layout_weight="0.58"
+            android:gravity="right|center"
             android:paddingRight="5dip"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -55,10 +57,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/LightGreen"
+                android:background="@color/MediumSeaGreen"
                 android:gravity="center_horizontal"
                 android:text="@string/label_income_trends"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -116,10 +118,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/LightRed"
+                android:background="@color/Red"
                 android:gravity="center_horizontal"
                 android:text="@string/label_expense_trends"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -175,7 +177,7 @@
         android:background="@color/LightBlue"
         android:gravity="center_horizontal"
         android:text="@string/label_running_budgets"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <ListView

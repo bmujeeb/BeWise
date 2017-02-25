@@ -19,6 +19,7 @@ Functionalities to be implemented:
 ---------------------------------------------
 * (Bug) Crash on orientation change.
 	#FIXED - DialogFragment orientation change causing crash which is fixed
+* IMPROVEMENT - Color scheme of the transaction detail dialog
 
 
 - Transactions add dialog UI modification:

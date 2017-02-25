@@ -20,5 +20,6 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:19.0.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile files('libs/mpandroidchartlibrary-2-1-0.jar')
 }
