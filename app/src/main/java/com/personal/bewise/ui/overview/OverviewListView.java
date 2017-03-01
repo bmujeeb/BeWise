@@ -70,29 +70,20 @@ public class OverviewListView extends ArrayAdapter<BudgetData> {
             _layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = _layoutInflater.inflate(_viewResourceId, null);
             vh.budget = (TextView) convertView.findViewById(R.id.budget_name);
-            vh.amountAllocated = (TextView) convertView.findViewById(R.id.budget_amount_allocated);
-            vh.amountUtilized = (TextView) convertView.findViewById(R.id.budget_amount_spent);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-
         BudgetData budget = _budgetsList.get(position);
-
         vh.budget.setText(budget.getBudgetName());
-        vh.amountAllocated.setText(Double.toString(budget.getBudgetAmount()));
         TransactionsTable td = new TransactionsTable(getContext());
         double utilizedAmount = td.getBudgetUtilizedAmount(budget.getBudgetName(), budget.getBudgetRecurrencePeriod(), budget.getBudgetStartDate(),
                 DateUtilities.getCurrentDate());
-        vh.amountUtilized.setText(Double.toString(utilizedAmount));
-
         return convertView;
     }
 
     static class ViewHolder {
         TextView budget;
-        TextView amountAllocated;
-        TextView amountUtilized;
     }
 
 }
