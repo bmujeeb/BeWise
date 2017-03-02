@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.budget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,10 @@ public class BudgetListView extends ArrayAdapter<BudgetData> {
                 DateUtilities.getCurrentDate());
         vh.amountUtilized.setText(Double.toString(utilizedAmount));
         vh.recurringPeriod.setText(budget.getBudgetRecurrencePeriod());
+
+        if (position % 2 == 1) {
+            convertView.setBackgroundColor(parent.getResources().getColor(R.color.LightBlue));
+        }
 
         return convertView;
     }

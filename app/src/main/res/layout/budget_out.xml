@@ -3,7 +3,6 @@
     android:id="@+id/list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/LightBlue"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
 

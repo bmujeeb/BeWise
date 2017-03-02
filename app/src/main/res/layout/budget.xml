@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/CornflowerBlue">
 
         <TextView
             android:id="@+id/title"
@@ -17,7 +18,7 @@
             android:layout_weight="0.7"
             android:gravity="center_horizontal"
             android:text="@string/label_budgets"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <ImageButton

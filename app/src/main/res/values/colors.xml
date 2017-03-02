@@ -22,7 +22,7 @@
     <color name="Pink">#FFC0CB</color>
     <color name="LightPink">#FFB6C1</color>
     <color name="Orange">#FFA500</color>
-    <color name="LightSalmon">#FFA07A</color>
+    <color name="LightSalmon">#ffa07a</color>
     <color name="DarkOrange">#FF8C00</color>
     <color name="Coral">#ff7f50</color>
     <color name="HotPink">#FF69B4</color>
@@ -109,13 +109,13 @@
     <color name="SlateBlue">#6A5ACD</color>
     <color name="DimGray">#696969</color>
     <color name="MediumAquamarine">#66CDAA</color>
-    <color name="CornflowerBlue">#6495ED</color>
+    <color name="CornflowerBlue">#6495ed</color>
     <color name="CadetBlue">#5F9EA0</color>
     <color name="DarkOliveGreen">#556B2F</color>
     <color name="Indigo">#4B0082</color>
     <color name="MediumTurquoise">#48D1CC</color>
     <color name="DarkSlateBlue">#483D8B</color>
-    <color name="SteelBlue">#4682B4</color>
+    <color name="SteelBlue">#4682b4</color>
     <color name="RoyalBlue">#4169e1</color>
     <color name="Turquoise">#40E0D0</color>
     <color name="MediumSeaGreen">#3cb371</color>
@@ -124,7 +124,7 @@
     <color name="SeaGreen">#2E8B57</color>
     <color name="ForestGreen">#228B22</color>
     <color name="LightSeaGreen">#20B2AA</color>
-    <color name="DodgerBlue">#1E90FF</color>
+    <color name="DodgerBlue">#1e90ff</color>
     <color name="MidnightBlue">#191970</color>
     <color name="Aqua">#00FFFF</color>
     <color name="Cyan">#00FFFF</color>
