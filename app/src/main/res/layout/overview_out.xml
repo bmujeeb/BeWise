@@ -16,8 +16,13 @@
         <TextView
             android:id="@+id/budget_name"
             style="@style/TransactionDetailsDialogValueStyle"
-            android:textStyle="normal|bold"
-            android:layout_height="28dp" />
+            android:layout_height="28dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/MediumSlateBlue"
+            android:textColor="@color/White"
+            android:textStyle="normal|bold" />
     </LinearLayout>
 
 </LinearLayout>

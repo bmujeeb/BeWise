@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="White">#FFFFFF</color>
+    <color name="White">#ffffff</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>
     <color name="Yellow">#FFFF00</color>
@@ -26,7 +26,7 @@
     <color name="DarkOrange">#FF8C00</color>
     <color name="Coral">#ff7f50</color>
     <color name="HotPink">#FF69B4</color>
-    <color name="Tomato">#FF6347</color>
+    <color name="Tomato">#ff6347</color>
     <color name="OrangeRed">#FF4500</color>
     <color name="DeepPink">#FF1493</color>
     <color name="Fuchsia">#FF00FF</color>
@@ -64,9 +64,9 @@
     <color name="Thistle">#D8BFD8</color>
     <color name="LightGrey">#D3D3D3</color>
     <color name="Tan">#D2B48C</color>
-    <color name="Chocolate">#D2691E</color>
+    <color name="Chocolate">#d2691e</color>
     <color name="Peru">#CD853F</color>
-    <color name="IndianRed">#CD5C5C</color>
+    <color name="IndianRed">#cd5c5c</color>
     <color name="MediumVioletRed">#C71585</color>
     <color name="Silver">#C0C0C0</color>
     <color name="DarkKhaki">#BDB76B</color>
@@ -87,11 +87,11 @@
     <color name="PaleGreen">#98fb98</color>
     <color name="DarkViolet">#9400D3</color>
     <color name="MediumPurple">#9370DB</color>
-    <color name="LightGreen">#90EE90</color>
+    <color name="LightGreen">#90ee90</color>
     <color name="DarkSeaGreen">#8FBC8F</color>
     <color name="SaddleBrown">#8b4513</color>
     <color name="DarkMagenta">#8B008B</color>
-    <color name="DarkRed">#8B0000</color>
+    <color name="DarkRed">#8b0000</color>
     <color name="BlueViolet">#8A2BE2</color>
     <color name="LightSkyBlue">#87CEFA</color>
     <color name="SkyBlue">#87CEEB</color>
@@ -102,7 +102,7 @@
     <color name="Aquamarine">#7FFFD4</color>
     <color name="Chartreuse">#7FFF00</color>
     <color name="LawnGreen">#7CFC00</color>
-    <color name="MediumSlateBlue">#7B68EE</color>
+    <color name="MediumSlateBlue">#7b68ee</color>
     <color name="LightSlateGray">#778899</color>
     <color name="SlateGray">#708090</color>
     <color name="OliveDrab">#6B8E23</color>
@@ -114,14 +114,14 @@
     <color name="DarkOliveGreen">#556B2F</color>
     <color name="Indigo">#4B0082</color>
     <color name="MediumTurquoise">#48D1CC</color>
-    <color name="DarkSlateBlue">#483D8B</color>
+    <color name="DarkSlateBlue">#483d8b</color>
     <color name="SteelBlue">#4682b4</color>
     <color name="RoyalBlue">#4169e1</color>
     <color name="Turquoise">#40E0D0</color>
     <color name="MediumSeaGreen">#3cb371</color>
     <color name="LimeGreen">#32CD32</color>
     <color name="DarkSlateGray">#2F4F4F</color>
-    <color name="SeaGreen">#2E8B57</color>
+    <color name="SeaGreen">#2e8b57</color>
     <color name="ForestGreen">#228B22</color>
     <color name="LightSeaGreen">#20B2AA</color>
     <color name="DodgerBlue">#1e90ff</color>

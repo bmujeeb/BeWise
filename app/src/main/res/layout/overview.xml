@@ -8,9 +8,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/Salmon"
+        android:layout_margin="2dp"
+        android:background="@color/RoyalBlue"
         android:gravity="center_horizontal"
         android:text="@string/label_overview"
+        android:textColor="@color/White"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -43,9 +45,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/MediumSeaGreen"
+        android:layout_margin="2dp"
+        android:background="@color/SeaGreen"
         android:gravity="center_horizontal"
         android:text="@string/label_income_trends"
+        android:textColor="@color/White"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -57,10 +61,13 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="2dp"
             android:layout_weight="0.40"
-            android:background="@color/PaleGreen"
+            android:background="@color/MediumSeaGreen"
             android:gravity="center"
             android:text="@string/label_last_7_days"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -68,8 +75,13 @@
             android:id="@+id/income_last_7_days"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="0.6"
+            android:background="@android:color/white"
             android:gravity="center"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -81,10 +93,12 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
             android:layout_weight="0.40"
-            android:background="@color/PaleGreen"
+            android:background="@color/MediumSeaGreen"
             android:gravity="center"
             android:text="@string/label_last_one_month"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -92,8 +106,12 @@
             android:id="@+id/income_last_one_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="0.6"
+            android:background="@android:color/white"
             android:gravity="center"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -102,9 +120,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/Red"
+        android:layout_margin="2dp"
+        android:background="@color/DarkRed"
         android:gravity="center_horizontal"
         android:text="@string/label_expense_trends"
+        android:textColor="@color/White"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -116,10 +136,13 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="2dp"
             android:layout_weight="0.4"
-            android:background="@color/LightRed"
+            android:background="@color/IndianRed"
             android:gravity="center"
             android:text="@string/label_last_7_days"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -127,8 +150,13 @@
             android:id="@+id/expense_last_7_days"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="0.6"
+            android:background="@android:color/white"
             android:gravity="center"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -140,10 +168,12 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
             android:layout_weight="0.4"
-            android:background="@color/LightRed"
+            android:background="@color/IndianRed"
             android:gravity="center"
             android:text="@string/label_last_one_month"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -151,8 +181,12 @@
             android:id="@+id/expense_last_one_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="0.6"
+            android:background="@android:color/white"
             android:gravity="center"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -161,9 +195,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@android:color/holo_blue_dark"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/DarkSlateBlue"
         android:gravity="center_horizontal"
         android:text="@string/label_running_budgets"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold" />
 
