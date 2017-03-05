@@ -48,13 +48,13 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18dp</item>
         <item name="android:paddingLeft">10dip</item>
-        <item name="android:layout_weight">0.4</item>
+        <item name="android:layout_weight">0.5</item>
     </style>
 
     <style name="TransactionAddDialogValueStyle" parent="@style/TransactionsDialogStyle">
         <item name="android:paddingRight">3dip</item>
         <item name="android:textSize">18dp</item>
-        <item name="android:layout_weight">0.6</item>
+        <item name="android:layout_weight">0.5</item>
     </style>
 
     <style name="TransactionDetailsDialogLabelStyle" parent="@style/TransactionsDialogStyle">

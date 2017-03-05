@@ -58,7 +58,7 @@
     <string name="label_last_one_month">30 Days</string>
     <string name="label_all_transactions">All</string>
     <string name="label_running_budgets">Running Budgets</string>
-    <string name="label_transactions">Actual Transactions</string>
+    <string name="label_transactions">Transactions</string>
     <string name="label_budget_allocations">Allocations</string>
     <string name="label_search">Search</string>
     <string name="label_from">From</string>

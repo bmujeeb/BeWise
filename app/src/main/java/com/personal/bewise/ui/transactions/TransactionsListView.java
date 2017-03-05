@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.transactions;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,7 +80,6 @@ public class TransactionsListView extends ArrayAdapter<TransactionsData> {
             convertView = _layoutInflater.inflate(_viewResourceId, null);
             vh.date = (TextView) convertView.findViewById(R.id.date);
             vh.category = (TextView) convertView.findViewById(R.id.category);
-            vh.budget = (TextView) convertView.findViewById(R.id.budget);
             vh.amount = (TextView) convertView.findViewById(R.id.amount);
             vh.itemsSelectCheckBox = (CheckBox) convertView.findViewById(R.id.items_select_checkbox);
             vh.itemsSelectCheckBox.setOnCheckedChangeListener(new FragmentCheckboxListener(_parent, position));
@@ -90,15 +90,14 @@ public class TransactionsListView extends ArrayAdapter<TransactionsData> {
         }
 
         if (_transactions.get(position).isIncome()) {
-            vh.listViewLayout.setBackgroundColor(parent.getResources().getColor(R.color.LightGreen));
+            vh.listViewLayout.setBackgroundColor(Color.parseColor("#FF3CB371")); // MediumSeaGreen
         } else {
-            vh.listViewLayout.setBackgroundColor(parent.getResources().getColor(R.color.LightRed));
+            vh.listViewLayout.setBackgroundColor(Color.parseColor("#FFCD5C5C")); // IndianRed
         }
 
         vh.date.setText(_transactions.get(position).getStartDate());
 
         vh.category.setText(_transactions.get(position).getCategory());
-        vh.budget.setText(_transactions.get(position).getBudget());
         vh.amount.setText(Double.toString(_transactions.get(position).getAmount()));
 
         return convertView;
@@ -108,7 +107,6 @@ public class TransactionsListView extends ArrayAdapter<TransactionsData> {
         TextView date;
         TextView category;
         TextView amount;
-        TextView budget;
         CheckBox itemsSelectCheckBox;
         LinearLayout listViewLayout;
     }

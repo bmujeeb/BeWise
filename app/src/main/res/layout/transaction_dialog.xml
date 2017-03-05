@@ -20,6 +20,7 @@
             <EditText
                 android:id="@+id/transaction_amount"
                 style="@style/TransactionAddDialogValueStyle"
+                android:gravity="center"
                 android:inputType="numberDecimal"
                 android:text="@string/default_amount" />
         </LinearLayout>
@@ -36,6 +37,7 @@
             <Spinner
                 android:id="@+id/transaction_category"
                 style="@style/TransactionAddDialogValueStyle"
+                android:gravity="center"
                 android:textColor="@color/Black" />
         </LinearLayout>
 
@@ -51,6 +53,7 @@
             <EditText
                 android:id="@+id/transaction_description"
                 style="@style/TransactionAddDialogValueStyle"
+                android:gravity="center"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -66,6 +69,7 @@
             <Spinner
                 android:id="@+id/transaction_budget"
                 style="@style/TransactionAddDialogValueStyle"
+                android:gravity="center"
                 android:textColor="@color/Black" />
         </LinearLayout>
 
@@ -81,6 +85,7 @@
             <EditText
                 android:id="@+id/transaction_edit_reason"
                 style="@style/TransactionAddDialogValueStyle"
+                android:gravity="center"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -97,6 +102,7 @@
             <Spinner
                 android:id="@+id/recurring_period"
                 style="@style/TransactionAddDialogValueStyle"
+                android:gravity="center"
                 android:textColor="@color/Black" />
         </LinearLayout>
 
@@ -114,6 +120,7 @@
                 android:id="@+id/start_recurring_date"
                 style="@style/TransactionAddDialogValueStyle"
                 android:focusable="false"
+                android:gravity="center"
                 android:inputType="date" />
         </LinearLayout>
 
