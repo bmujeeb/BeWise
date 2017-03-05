@@ -48,6 +48,7 @@
         <TextView
             android:id="@+id/transaction_category"
             style="@style/TransactionDetailsDialogValueStyle"
+            android:maxLines="1"
             android:textColor="@color/Black" />
     </LinearLayout>
 
@@ -62,7 +63,8 @@
 
         <TextView
             android:id="@+id/transaction_description"
-            style="@style/TransactionDetailsDialogValueStyle" />
+            style="@style/TransactionDetailsDialogValueStyle"
+            android:maxLines="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -91,7 +93,8 @@
 
         <TextView
             android:id="@+id/modify_reason"
-            style="@style/TransactionDetailsDialogValueStyle" />
+            style="@style/TransactionDetailsDialogValueStyle"
+            android:maxLines="1" />
     </LinearLayout>
 
     <LinearLayout

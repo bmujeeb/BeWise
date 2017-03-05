@@ -15,6 +15,7 @@
 
             <TextView
                 style="@style/TransactionAddDialogLabelStyle"
+                android:gravity="center_vertical"
                 android:text="@string/amount" />
 
             <EditText
@@ -32,12 +33,12 @@
 
             <TextView
                 style="@style/TransactionAddDialogLabelStyle"
+                android:gravity="center_vertical"
                 android:text="@string/category" />
 
             <Spinner
                 android:id="@+id/transaction_category"
                 style="@style/TransactionAddDialogValueStyle"
-                android:gravity="center"
                 android:textColor="@color/Black" />
         </LinearLayout>
 
@@ -48,6 +49,7 @@
 
             <TextView
                 style="@style/TransactionAddDialogLabelStyle"
+                android:gravity="center_vertical"
                 android:text="@string/description" />
 
             <EditText
@@ -64,12 +66,12 @@
 
             <TextView
                 style="@style/TransactionAddDialogLabelStyle"
+                android:gravity="center_vertical"
                 android:text="@string/budget" />
 
             <Spinner
                 android:id="@+id/transaction_budget"
                 style="@style/TransactionAddDialogValueStyle"
-                android:gravity="center"
                 android:textColor="@color/Black" />
         </LinearLayout>
 
@@ -80,6 +82,7 @@
 
             <TextView
                 style="@style/TransactionAddDialogLabelStyle"
+                android:gravity="center_vertical"
                 android:text="@string/modify_reason" />
 
             <EditText
@@ -97,6 +100,7 @@
 
             <TextView
                 style="@style/TransactionAddDialogLabelStyle"
+                android:gravity="center_vertical"
                 android:text="@string/label_recurring_period" />
 
             <Spinner
@@ -114,6 +118,7 @@
 
             <TextView
                 style="@style/TransactionAddDialogLabelStyle"
+                android:gravity="center_vertical"
                 android:text="@string/label_start_date" />
 
             <EditText
