@@ -19,13 +19,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:text="@string/label_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:paddingLeft="10dp"
-                android:text="@string/label_amount"
                 android:textColor="@color/White"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -34,9 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_weight="0.60"
-                android:gravity="center"
+                android:gravity="right"
+                android:paddingRight="10dp"
                 android:textColor="@color/White"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -46,13 +47,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:text="@string/label_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:paddingLeft="20dp"
-                android:text="@string/label_date"
                 android:textColor="@color/White"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -61,9 +62,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_weight="0.60"
-                android:gravity="center"
+                android:gravity="right"
+                android:paddingRight="10dp"
                 android:textColor="@color/White"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,25 +74,25 @@
             android:orientation="horizontal">
 
             <TextView
+                android:text="@string/label_category"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.40"
                 android:paddingLeft="20dp"
-                android:text="@string/label_category"
                 android:textColor="@color/White"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/category"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:layout_weight="0.60"
-                android:gravity="center"
+                android:gravity="right"
                 android:maxLines="1"
+                android:paddingRight="10dp"
                 android:textColor="@color/White"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
 

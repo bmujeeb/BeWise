@@ -102,7 +102,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 mTitle = getString(R.string.label_transactions);
                 break;
             case 3:
-                mTitle = getString(R.string.label_pending_transactions);
+                mTitle = getString(R.string.label_outstanding_transactions);
                 break;
             case 4:
                 mTitle = getString(R.string.label_recurring_transactions);

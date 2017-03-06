@@ -90,9 +90,9 @@ public class TransactionsListView extends ArrayAdapter<TransactionsData> {
         }
 
         if (_transactions.get(position).isIncome()) {
-            vh.listViewLayout.setBackgroundColor(Color.parseColor("#FF3CB371")); // MediumSeaGreen
+            vh.listViewLayout.setBackgroundColor(Color.parseColor("#2E7D32")); // MediumSeaGreen
         } else {
-            vh.listViewLayout.setBackgroundColor(Color.parseColor("#FFCD5C5C")); // IndianRed
+            vh.listViewLayout.setBackgroundColor(Color.parseColor("#C62828")); // IndianRed
         }
 
         vh.date.setText(_transactions.get(position).getStartDate());

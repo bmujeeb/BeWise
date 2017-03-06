@@ -5,10 +5,10 @@
     <string name="app_slogan">Manage your finances</string>
     <string name="income">Income</string>
     <string name="expenses">Expenses</string>
-    <string name="label_recurring_transactions">Recurring Transactions</string>
+    <string name="label_recurring_transactions">Recurring</string>
     <string name="label_searched_transactions">Searched Transactions</string>
     <string name="label_budgets">Budgets</string>
-    <string name="label_pending_transactions">Pending Transactions</string>
+    <string name="label_outstanding_transactions">Outstanding</string>
     <string name="settings">Settings</string>
     <string name="label_privacy_statement">Privacy Statement</string>
     <string name="debug">Debug View</string>

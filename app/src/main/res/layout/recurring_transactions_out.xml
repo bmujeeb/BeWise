@@ -3,92 +3,98 @@
     android:id="@+id/list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Beige"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
+        android:layout_weight="0.9"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_due_date"
-            android:textColor="@color/Black"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:text="@string/label_due_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:paddingLeft="10dp"
+                android:textColor="@color/White"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="0.60"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:textColor="@color/White"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_category"
-            android:textColor="@color/Black"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:orientation="vertical">
+            <TextView
+                android:text="@string/label_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:paddingLeft="20dp"
+                android:textColor="@color/White"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="0.60"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:textColor="@color/White"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/Black" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:singleLine="true"
-            android:textColor="@color/Black" />
-    </LinearLayout>
+            <TextView
+                android:text="@string/label_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:paddingLeft="20dp"
+                android:textColor="@color/White"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:orientation="vertical">
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                android:gravity="right"
+                android:maxLines="1"
+                android:paddingRight="10dp"
+                android:textColor="@color/White"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_amount"
-            android:textColor="@color/Black"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_budget"
-            android:textColor="@color/Black"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:id="@+id/budget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:singleLine="true"
-            android:textColor="@color/Black" />
+        </LinearLayout>
     </LinearLayout>
 
     <CheckBox
@@ -97,5 +103,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0.1" />
+
 
 </LinearLayout>

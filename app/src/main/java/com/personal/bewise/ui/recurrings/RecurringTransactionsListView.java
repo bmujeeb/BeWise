@@ -1,6 +1,7 @@
 package com.personal.bewise.ui.recurrings;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,6 @@ public class RecurringTransactionsListView extends ArrayAdapter<TransactionsData
             convertView = _layoutInflater.inflate(_viewResourceId, null);
             vh.date = (TextView) convertView.findViewById(R.id.date);
             vh.category = (TextView) convertView.findViewById(R.id.category);
-            vh.budget = (TextView) convertView.findViewById(R.id.budget);
             vh.amount = (TextView) convertView.findViewById(R.id.amount);
             vh.itemsSelectCheckBox = (CheckBox) convertView.findViewById(R.id.items_select_checkbox);
             vh.itemsSelectCheckBox.setOnCheckedChangeListener(new FragmentCheckboxListener(_parent, position));
@@ -65,15 +65,16 @@ public class RecurringTransactionsListView extends ArrayAdapter<TransactionsData
             vh = (ViewHolder) convertView.getTag();
         }
 
+        // Change Color of income and expenses transactions
         if (_transactions.get(position).isIncome()) {
-            vh.listViewLayout.setBackgroundColor(parent.getResources().getColor(R.color.LightGreen));
+            vh.listViewLayout.setBackgroundColor(Color.parseColor("#2E7D32"));
         } else {
-            vh.listViewLayout.setBackgroundColor(parent.getResources().getColor(R.color.LightRed));
+            vh.listViewLayout.setBackgroundColor(Color.parseColor("#C62828"));
         }
+
         vh.date.setText(_transactions.get(position).getNextDueDate());
         vh.category.setText(_transactions.get(position).getCategory());
         vh.amount.setText(Double.toString(_transactions.get(position).getAmount()));
-        vh.budget.setText(_transactions.get(position).getBudget());
 
         return convertView;
     }
@@ -82,7 +83,6 @@ public class RecurringTransactionsListView extends ArrayAdapter<TransactionsData
         TextView date;
         TextView category;
         TextView amount;
-        TextView budget;
         CheckBox itemsSelectCheckBox;
         LinearLayout listViewLayout;
     }

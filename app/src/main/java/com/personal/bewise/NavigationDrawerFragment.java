@@ -107,7 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
         // Any item removed from the list will not be shown on the application.
         mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1, new String[]{getString(R.string.label_overview), getString(R.string.label_transactions),
-                getString(R.string.label_pending_transactions), getString(R.string.label_recurring_transactions), getString(R.string.label_budgets),
+                getString(R.string.label_outstanding_transactions), getString(R.string.label_recurring_transactions), getString(R.string.label_budgets),
                 getString(R.string.label_privacy_statement), getString(R.string.quit), getString(R.string.debug),}));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
