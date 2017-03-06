@@ -57,6 +57,7 @@ public class RecurringTransactionsListView extends ArrayAdapter<TransactionsData
             vh.date = (TextView) convertView.findViewById(R.id.date);
             vh.category = (TextView) convertView.findViewById(R.id.category);
             vh.amount = (TextView) convertView.findViewById(R.id.amount);
+            vh.recurringPeriod = (TextView) convertView.findViewById(R.id.recurring_period);
             vh.itemsSelectCheckBox = (CheckBox) convertView.findViewById(R.id.items_select_checkbox);
             vh.itemsSelectCheckBox.setOnCheckedChangeListener(new FragmentCheckboxListener(_parent, position));
             vh.listViewLayout = (LinearLayout) convertView.findViewById(R.id.list_item_layout);
@@ -75,6 +76,7 @@ public class RecurringTransactionsListView extends ArrayAdapter<TransactionsData
         vh.date.setText(_transactions.get(position).getNextDueDate());
         vh.category.setText(_transactions.get(position).getCategory());
         vh.amount.setText(Double.toString(_transactions.get(position).getAmount()));
+        vh.recurringPeriod.setText(_transactions.get(position).getRecurringPeriod());
 
         return convertView;
     }
@@ -83,6 +85,7 @@ public class RecurringTransactionsListView extends ArrayAdapter<TransactionsData
         TextView date;
         TextView category;
         TextView amount;
+        TextView recurringPeriod;
         CheckBox itemsSelectCheckBox;
         LinearLayout listViewLayout;
     }
