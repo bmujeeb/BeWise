@@ -27,7 +27,6 @@ Functionalities to be implemented:
 * (BUG) Crash on orientation change. 
 	#FIXED - DialogFragment orientation change causing crash which is fixed
 
-
 - Budget: (High):
 -----------------
 * (--DONE--)(FIXED)(BUG) Clicking on list items in listview is getting data from main list. 
@@ -49,9 +48,10 @@ Functionalities to be implemented:
         1. Delete only the budget and remove referece with each transaction associated with the budget.
         2. Delete the transactions as well along with the budget.
         3. Ask the user which option they want to avail.
-* Increase size of title.
-* Change background of title.
-* Graph of budgets and compare it (Low)
+* (--Done--) Increase size of title.
+* (--Done--) Change background of title
+* Graph of budgets and compare it (Medium)
+* (High) When a budget is deleted, all the transactions taking reference of that buget will be deleted.
 
 
 - Search: (High)
