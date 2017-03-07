@@ -17,6 +17,8 @@ import com.personal.bewise.BeWiseConstants;
 import com.personal.bewise.R;
 import com.personal.bewise.database.BudgetData;
 import com.personal.bewise.database.BudgetTable;
+import com.personal.bewise.database.PendingTransactionsTable;
+import com.personal.bewise.database.RecurrenceTable;
 import com.personal.bewise.database.TransactionsData;
 import com.personal.bewise.database.TransactionsTable;
 import com.personal.bewise.ui.CustomListFragment;
@@ -105,10 +107,19 @@ public class BudgetFragment extends CustomListFragment {
             @Override
             public void onClick(View v) {
                 BudgetTable budgetTable = new BudgetTable(_context);
+                TransactionsTable transactionsTable = new TransactionsTable(_context);
+                RecurrenceTable recurrenceTable = new RecurrenceTable(_context);
+                PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(_context);
+
                 Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
                 while (iterator.hasNext()) {
                     Map.Entry<Integer, Boolean> item = iterator.next();
-                    budgetTable.deleteBudget(_budgetsList.get(item.getKey()).getBudgetName());
+                    String budgetName = _budgetsList.get(item.getKey()).getBudgetName();
+                    budgetTable.deleteBudget(budgetName);
+                    transactionsTable.updateTransaction("budget", budgetName, null);
+                    recurrenceTable.updateRecurringTransaction("budget", budgetName, null);
+                    pendingTransactionsTable.updatePendingTransaction("budget", budgetName, null);
+
                     _budgetsList.clear();
                     _budgetsList = budgetTable.getAllBudgets();
                     iterator.remove();

@@ -110,6 +110,28 @@ public class RecurrenceTable extends TransactionItemsTable {
         return result;
     }
 
+    /**
+     * Update recurring transaction table column value based on a given column, it's current and new value.
+     *
+     * @param columnName Column name.
+     * @param currentColumnValue Current column value.
+     * @param newColumnValue New column value.
+     * @return
+     */
+    public int updateRecurringTransaction(String columnName, String currentColumnValue, String newColumnValue) {
+        Log.d(BeWiseConstants.LOG_TAG, "updateRecurringTransaction(...");
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(columnName, currentColumnValue);
+
+        int result = db.update(RECURRENCE_TABLE, values, columnName + " = ?",
+                new String[]{newColumnValue});
+
+        db.close();
+        return result;
+    }
+
     // Can be refactored
     public void deleteRecurringTransaction(long recurrenceID) {
         // Gets the data repository in write mode

@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.personal.bewise.BeWiseConstants;
-import com.personal.bewise.R;
 import com.personal.bewise.utils.DateUtilities;
 import com.personal.bewise.utils.NumberUtilities;
 import com.personal.bewise.utils.SearchableItems;
@@ -276,6 +275,25 @@ public class TransactionsTable extends TransactionItemsTable {
         values.put(TRANSACTION_EDIT_REASON, transaction.getModifyReason());
         values.put(TRANSACTION_BUDGET, transaction.getBudget());
         int result = db.update(TRANSACTION_TABLE, values, TRANSACTION_ID + " = ?", new String[]{String.valueOf(transaction.getTransactionID())});
+        db.close();
+        return result;
+    }
+
+    /**
+     * Update transactions table based on Column Name and Column Value
+     *
+     * @param columnName  Column name to update.
+     * @param currentColumnValue Current column value to update.
+     * @param newColumnValue New column value to update.
+     *
+     * @return Status if the update is successful or not.
+     */
+    public int updateTransaction(String columnName, String currentColumnValue, String newColumnValue) {
+        Log.d(BeWiseConstants.LOG_TAG, "updateTransaction(...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(columnName, currentColumnValue);
+        int result = db.update(TRANSACTION_TABLE, values, columnName + " = ?", new String[]{newColumnValue});
         db.close();
         return result;
     }

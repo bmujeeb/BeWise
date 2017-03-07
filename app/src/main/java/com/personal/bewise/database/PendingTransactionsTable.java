@@ -111,6 +111,20 @@ public class PendingTransactionsTable extends TransactionItemsTable {
         return result;
     }
 
+    public int updatePendingTransaction(String columnName, String currentColumnValue, String newColumnValue) {
+        Log.d(BeWiseConstants.LOG_TAG, "updatePendingTransaction(...");
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(columnName, currentColumnValue);
+
+        int result = db.update(PENDING_TRANSACTIONS_TABLE, values, columnName + " = ?",
+                new String[]{newColumnValue});
+
+        db.close();
+        return result;
+    }
+
     /**
      * Delete multiple pending transaction items.
      *
