@@ -282,20 +282,19 @@ public class TransactionsTable extends TransactionItemsTable {
     /**
      * Update transactions table based on Column Name and Column Value
      *
-     * @param columnName  Column name to update.
+     * @param columnName         Column name to update.
      * @param currentColumnValue Current column value to update.
-     * @param newColumnValue New column value to update.
-     *
+     * @param newColumnValue     New column value to update.
      * @return Status if the update is successful or not.
      */
     public int updateTransaction(String columnName, String currentColumnValue, String newColumnValue) {
-        Log.d(BeWiseConstants.LOG_TAG, "updateTransaction(...");
+        Log.d(BeWiseConstants.LOG_TAG, "updateTransaction(" + columnName + "," + currentColumnValue + "," + newColumnValue + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(columnName, currentColumnValue);
-        int result = db.update(TRANSACTION_TABLE, values, columnName + " = ?", new String[]{newColumnValue});
+        values.put(columnName, newColumnValue);
+        int result = db.update(TRANSACTION_TABLE, values, columnName + " = ?", new String[]{currentColumnValue});
         db.close();
-        return result;
+        return 0;
     }
 
     /**

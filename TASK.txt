@@ -52,6 +52,7 @@ Functionalities to be implemented:
 * (--Done--) Change background of title
 * Graph of budgets and compare it (Medium)
 * (High) When a budget is deleted, all the transactions taking reference of that buget will be deleted.
+* (Crash) When all the budgets are deleted, the app crash. Index array out of bound.
 
 
 - Search: (High)

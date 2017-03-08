@@ -123,10 +123,10 @@ public class RecurrenceTable extends TransactionItemsTable {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(columnName, currentColumnValue);
+        values.put(columnName, newColumnValue);
 
         int result = db.update(RECURRENCE_TABLE, values, columnName + " = ?",
-                new String[]{newColumnValue});
+                new String[]{currentColumnValue});
 
         db.close();
         return result;
