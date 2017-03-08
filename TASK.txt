@@ -10,6 +10,9 @@ Functionalities to be implemented:
 * Testing fragments & dialogs behavior with orientation change.
 
 
+* (Showstopper)(Crash) Whenever multiple selected items are deleted, application crashes.
+
+
 - Overview Fragments:
 ----------------------
 * Rework on budget overview stuff
