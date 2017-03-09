@@ -82,11 +82,11 @@ public class TransactionsListView extends ArrayAdapter<TransactionsData> {
             vh.category = (TextView) convertView.findViewById(R.id.category);
             vh.amount = (TextView) convertView.findViewById(R.id.amount);
             vh.itemsSelectCheckBox = (CheckBox) convertView.findViewById(R.id.items_select_checkbox);
-            vh.itemsSelectCheckBox.setOnCheckedChangeListener(new FragmentCheckboxListener(_parent, position));
             vh.listViewLayout = (LinearLayout) convertView.findViewById(R.id.list_item_layout);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
+            vh.itemsSelectCheckBox.setOnCheckedChangeListener(null);
         }
 
         if (_transactions.get(position).isIncome()) {
@@ -96,9 +96,9 @@ public class TransactionsListView extends ArrayAdapter<TransactionsData> {
         }
 
         vh.date.setText(_transactions.get(position).getStartDate());
-
         vh.category.setText(_transactions.get(position).getCategory());
         vh.amount.setText(Double.toString(_transactions.get(position).getAmount()));
+        vh.itemsSelectCheckBox.setOnCheckedChangeListener(new FragmentCheckboxListener(_parent, position));
 
         return convertView;
     }

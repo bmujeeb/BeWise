@@ -1,6 +1,9 @@
 package com.personal.bewise.ui;
 
+import android.util.Log;
 import android.widget.CompoundButton;
+
+import com.personal.bewise.BeWiseConstants;
 
 public class FragmentCheckboxListener implements CompoundButton.OnCheckedChangeListener {
 
@@ -15,6 +18,7 @@ public class FragmentCheckboxListener implements CompoundButton.OnCheckedChangeL
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Log.d(BeWiseConstants.LOG_TAG, "onCheckedChanged(...");
         parent.setCheckBoxSelections(itemId, isChecked);
     }
 

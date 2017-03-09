@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,9 +117,6 @@ public class TransactionsFragment extends CustomListFragment {
                     Map.Entry<Integer, Boolean> item = iterator.next();
                     TransactionsData data = _transactionsList.get(item.getKey());
                     transactionsTable.deleteSingleTransaction(data.getTransactionID());
-                    _transactionsList.clear();
-                    _transactionsList = transactionsTable.getAllTransactions();
-                    iterator.remove();
                 }
                 updateActivity();
             }
@@ -226,6 +224,7 @@ public class TransactionsFragment extends CustomListFragment {
      */
     @Override
     public void setCheckBoxSelections(int itemId, boolean checkedState) {
+        Log.d(BeWiseConstants.LOG_TAG, "setCheckBoxSelections( "+ itemId+", " +checkedState+")");
         _selectedItem = itemId;
         if (checkedState) {
             _checkState.put(itemId, checkedState);

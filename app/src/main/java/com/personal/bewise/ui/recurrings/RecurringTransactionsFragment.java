@@ -86,9 +86,6 @@ public class RecurringTransactionsFragment extends CustomListFragment {
                     Map.Entry<Integer, Boolean> item = iterator.next();
                     TransactionsData data = _transactions.get(item.getKey());
                     recurrenceTable.deleteRecurringTransaction(data.getRecurringID());
-                    _transactions.clear();
-                    _transactions = recurrenceTable.getAllRecurringTransactions();
-                    iterator.remove();
                 }
                 updateActivity();
             }

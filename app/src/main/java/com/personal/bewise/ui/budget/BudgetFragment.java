@@ -116,13 +116,9 @@ public class BudgetFragment extends CustomListFragment {
                     Map.Entry<Integer, Boolean> item = iterator.next();
                     String budgetName = _budgetsList.get(item.getKey()).getBudgetName();
                     budgetTable.deleteBudget(budgetName);
-                    // transactionsTable.updateTransaction("budget", budgetName, null);
-                    // recurrenceTable.updateRecurringTransaction("budget", budgetName, null);
-                    // pendingTransactionsTable.updatePendingTransaction("budget", budgetName, null);
-
-                    _budgetsList.clear();
-                    _budgetsList = budgetTable.getAllBudgets();
-                    iterator.remove();
+                    transactionsTable.updateTransaction("budget", budgetName, null);
+                    recurrenceTable.updateRecurringTransaction("budget", budgetName, null);
+                    pendingTransactionsTable.updatePendingTransaction("budget", budgetName, null);
                 }
                 updateActivity();
             }

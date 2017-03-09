@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,18 +90,15 @@ public class PendingTransactionsFragment extends CustomListFragment {
                         getActivity());
                 Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
                 while (iterator.hasNext()) {
+                    // bug: transations are only 2 but index is retured as 3
                     Map.Entry<Integer, Boolean> item = iterator.next();
                     TransactionsData data = _transactions.get(item.getKey());
                     pendingTransactionsTable.deleteSinglePendingTransaction(data.getTransactionID());
-                    _transactions.clear();
-                    _transactions = pendingTransactionsTable.getAllPendingTransactions();
-                    iterator.remove();
                 }
                 updateActivity();
             }
         });
         _deleteButton.setEnabled(false);
-
         return view;
     }
 

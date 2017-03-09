@@ -64,6 +64,7 @@ public class RecurringTransactionsListView extends ArrayAdapter<TransactionsData
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
+            vh.itemsSelectCheckBox.setOnCheckedChangeListener(null);
         }
 
         // Change Color of income and expenses transactions
