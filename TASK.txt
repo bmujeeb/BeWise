@@ -48,14 +48,18 @@ Functionalities to be implemented:
 * Test the dialog for insert and edit scenario.
 * Delete budget scenario.
     Solutions: 
-        1. Delete only the budget and remove referece with each transaction associated with the budget.
+        1. (--Done--)(Solution) Delete only the budget and remove referece with each transaction associated with the budget. 
         2. Delete the transactions as well along with the budget.
         3. Ask the user which option they want to avail.
+* Delete a transaction available in budget.
+    Solutions: 
+        If the transaction is deleted from within the budget fragment, only the reference of transaction to budget will be deleted. Transaction will remain there.
 * (--Done--) Increase size of title.
 * (--Done--) Change background of title
 * Graph of budgets and compare it (Medium)
-* (High) When a budget is deleted, all the transactions taking reference of that buget will be deleted.
-* (Crash) When all the budgets are deleted, the app crash. Index array out of bound.
+* (High)(FIXED) When a budget is deleted, all the transactions taking reference of that buget will be deleted.
+* (--Done--)(FIXED)(Crash) When all the budgets are deleted, the app crash. Index array out of bound.
+* (Crash) When a transaction is deleted budgets are deleted, the app crash. Index array out of bound.
 
 
 - Search: (High)
