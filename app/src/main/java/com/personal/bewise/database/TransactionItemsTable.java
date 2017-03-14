@@ -95,31 +95,31 @@ public abstract class TransactionItemsTable extends TransactionsDatabase {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(BeWiseConstants.LOG_TAG, "onCreate(...");
-        Log.d(BeWiseConstants.LOG_TAG, CREATE_RECURRENCE_TABLE);
+        Log.d(this.getClass().toString(), "onCreate(...");
+        Log.d(this.getClass().toString(), CREATE_RECURRENCE_TABLE);
         db.execSQL(CREATE_RECURRENCE_TABLE);
-        Log.d(BeWiseConstants.LOG_TAG, CREATE_TRANSACTION_TABLE);
+        Log.d(this.getClass().toString(), CREATE_TRANSACTION_TABLE);
         db.execSQL(CREATE_TRANSACTION_TABLE);
-        Log.d(BeWiseConstants.LOG_TAG, CREATE_BUDGET_TABLE);
+        Log.d(this.getClass().toString(), CREATE_BUDGET_TABLE);
         db.execSQL(CREATE_BUDGET_TABLE);
-        Log.d(BeWiseConstants.LOG_TAG, CREATE_PENDING_TRANSACTIONS_TABLE);
+        Log.d(this.getClass().toString(), CREATE_PENDING_TRANSACTIONS_TABLE);
         db.execSQL(CREATE_PENDING_TRANSACTIONS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(BeWiseConstants.LOG_TAG, "onUpgrade(...");
-        Log.d(BeWiseConstants.LOG_TAG, CREATE_RECURRENCE_TABLE);
+        Log.d(this.getClass().toString(), "onUpgrade(...");
+        Log.d(this.getClass().toString(), CREATE_RECURRENCE_TABLE);
         db.execSQL(CREATE_RECURRENCE_TABLE);
-        Log.d(BeWiseConstants.LOG_TAG, CREATE_TRANSACTION_TABLE);
+        Log.d(this.getClass().toString(), CREATE_TRANSACTION_TABLE);
         db.execSQL(CREATE_TRANSACTION_TABLE);
-        Log.d(BeWiseConstants.LOG_TAG, CREATE_BUDGET_TABLE);
+        Log.d(this.getClass().toString(), CREATE_BUDGET_TABLE);
         db.execSQL(CREATE_BUDGET_TABLE);
         onCreate(db);
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(BeWiseConstants.LOG_TAG, "onDowngrade( " + oldVersion + ", " + newVersion + ")");
+        Log.d(this.getClass().toString(), "onDowngrade( " + oldVersion + ", " + newVersion + ")");
         onUpgrade(db, oldVersion, newVersion);
     }
 

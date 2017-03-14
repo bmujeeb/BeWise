@@ -119,7 +119,7 @@ public class RecurrenceTable extends TransactionItemsTable {
      * @return
      */
     public int updateRecurringTransaction(String columnName, String currentColumnValue, String newColumnValue) {
-        Log.d(BeWiseConstants.LOG_TAG, "updateRecurringTransaction(...");
+        Log.d(this.getClass().toString(), "updateRecurringTransaction(...");
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -154,7 +154,7 @@ public class RecurrenceTable extends TransactionItemsTable {
     public List<TransactionsData> searchRecurringTable(String searchableItems, String category, String startDate, String endDate, double minAmount,
                                                        double maxAmount, String recurringPeriod, String stringToSearch) {
         // TODO: FIX logging
-        Log.d(BeWiseConstants.LOG_TAG, "searchTransactionsTable(" + searchableItems + ", " + startDate + ")");
+        Log.d(this.getClass().toString(), "searchTransactionsTable(" + searchableItems + ", " + startDate + ")");
         List<TransactionsData> transactionsList = new ArrayList<TransactionsData>();
         SQLiteDatabase db = this.getWritableDatabase();
 

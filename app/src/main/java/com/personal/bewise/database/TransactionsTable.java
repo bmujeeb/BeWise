@@ -31,7 +31,7 @@ public class TransactionsTable extends TransactionItemsTable {
     }
 
     public long addNewTransaction(TransactionsData transaction) {
-        Log.d(BeWiseConstants.LOG_TAG, "addNewTransaction(...");
+        Log.d(this.getClass().toString(), "addNewTransaction(...");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TRANSACTION_ID, transaction.getTransactionID());
@@ -58,7 +58,7 @@ public class TransactionsTable extends TransactionItemsTable {
      * @return
      */
     public TransactionsData getTransactionItem(long transactionID) {
-        Log.d(BeWiseConstants.LOG_TAG, "getTransactionItem(" + transactionID + ", ....");
+        Log.d(this.getClass().toString(), "getTransactionItem(" + transactionID + ", ....");
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TRANSACTION_TABLE, TRANSACTIONS_TABLE_ARRAY, TRANSACTION_ID + "=?", new String[]{String.valueOf(transactionID)}, null,
                 null, null, null);
@@ -93,7 +93,7 @@ public class TransactionsTable extends TransactionItemsTable {
      * @return
      */
     public double getTransactionsBalance(SearchableItems item, String date) {
-        Log.d(BeWiseConstants.LOG_TAG, "getTransactionsBalance(...");
+        Log.d(this.getClass().toString(), "getTransactionsBalance(...");
         String selectQuery = "SELECT sum(" + TRANSACTION_AMOUNT + ") FROM " + TRANSACTION_TABLE;
 
         if (item.getValue().equals(SearchableItems.INCOME.getValue())) {
@@ -112,7 +112,7 @@ public class TransactionsTable extends TransactionItemsTable {
         }
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d(BeWiseConstants.LOG_TAG, selectQuery);
+        Log.d(this.getClass().toString(), selectQuery);
         Cursor cursor = db.rawQuery(selectQuery, null);
         double amount = 0.0;
         if (cursor != null && cursor.moveToFirst()) {
@@ -139,7 +139,7 @@ public class TransactionsTable extends TransactionItemsTable {
     public List<TransactionsData> searchTransactionsTable(String searchableItems, String category, String startDate, String endDate, double minAmount,
                                                           double maxAmount, String recurringPeriod, String stringToSearch) {
         // TODO: FIX logging
-        Log.d(BeWiseConstants.LOG_TAG, "searchTransactionsTable(" + searchableItems + ", " + startDate + ")");
+        Log.d(this.getClass().toString(), "searchTransactionsTable(" + searchableItems + ", " + startDate + ")");
         List<TransactionsData> transactionsList = new ArrayList<TransactionsData>();
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -206,7 +206,7 @@ public class TransactionsTable extends TransactionItemsTable {
             empty = false;
         }
 
-        Log.d(BeWiseConstants.LOG_TAG, "Search Query: " + selectQuery);
+        Log.d(this.getClass().toString(), "Search Query: " + selectQuery);
 
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -234,11 +234,11 @@ public class TransactionsTable extends TransactionItemsTable {
     }
 
     public List<TransactionsData> getAllTransactions() {
-        Log.d(BeWiseConstants.LOG_TAG, "getAllTransactions(...");
+        Log.d(this.getClass().toString(), "getAllTransactions(...");
         List<TransactionsData> transactionsList = new ArrayList<TransactionsData>();
         String selectQuery = "SELECT  * FROM " + TRANSACTION_TABLE;
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d(BeWiseConstants.LOG_TAG, "Search Query: " + selectQuery);
+        Log.d(this.getClass().toString(), "Search Query: " + selectQuery);
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
@@ -265,7 +265,7 @@ public class TransactionsTable extends TransactionItemsTable {
     }
 
     public int updateTransaction(TransactionsData transaction) {
-        Log.d(BeWiseConstants.LOG_TAG, "updateTransaction(...");
+        Log.d(this.getClass().toString(), "updateTransaction(...");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TRANSACTION_DATE, DateUtilities.getTimestampFromDate(transaction.getStartDate()));
@@ -288,7 +288,7 @@ public class TransactionsTable extends TransactionItemsTable {
      * @return Status if the update is successful or not.
      */
     public int updateTransaction(String columnName, String currentColumnValue, String newColumnValue) {
-        Log.d(BeWiseConstants.LOG_TAG, "updateTransaction(" + columnName + "," + currentColumnValue + "," + newColumnValue + ")");
+        Log.d(this.getClass().toString(), "updateTransaction(" + columnName + "," + currentColumnValue + "," + newColumnValue + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(columnName, newColumnValue);
@@ -303,7 +303,7 @@ public class TransactionsTable extends TransactionItemsTable {
      * @param transactionId
      */
     public void deleteSingleTransaction(long transactionId) {
-        Log.d(BeWiseConstants.LOG_TAG, "deleteSingleTransaction(" + transactionId + ")");
+        Log.d(this.getClass().toString(), "deleteSingleTransaction(" + transactionId + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TRANSACTION_TABLE, TRANSACTION_ID + " = ?", new String[]{String.valueOf(transactionId)});
         db.close();
@@ -315,7 +315,7 @@ public class TransactionsTable extends TransactionItemsTable {
      * @param transactionId
      */
     public void deleteMultipleTransactions(long transactionId) {
-        Log.d(BeWiseConstants.LOG_TAG, "deleteMultipleTransactions(" + transactionId + ")");
+        Log.d(this.getClass().toString(), "deleteMultipleTransactions(" + transactionId + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TRANSACTION_TABLE, TRANSACTION_ID + " = ?", new String[]{String.valueOf(transactionId)});
         db.close();
@@ -331,7 +331,7 @@ public class TransactionsTable extends TransactionItemsTable {
      * @return
      */
     public double getBudgetUtilizedAmount(String budgetName, String period, String startDate, String endDate) {
-        Log.d(BeWiseConstants.LOG_TAG, "getBudgetUtilizedAmount(...");
+        Log.d(this.getClass().toString(), "getBudgetUtilizedAmount(...");
         String selectQuery = "SELECT sum(" + TRANSACTION_AMOUNT + ") FROM " + TRANSACTION_TABLE;
 
         selectQuery += " where " + TRANSACTION_BUDGET + " IS '" + budgetName + "'";
@@ -347,7 +347,7 @@ public class TransactionsTable extends TransactionItemsTable {
         }
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d(BeWiseConstants.LOG_TAG, selectQuery);
+        Log.d(this.getClass().toString(), selectQuery);
         Cursor cursor = db.rawQuery(selectQuery, null);
         double amount = 0.0;
         if (cursor.moveToFirst())

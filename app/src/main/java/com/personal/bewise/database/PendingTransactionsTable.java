@@ -25,7 +25,7 @@ public class PendingTransactionsTable extends TransactionItemsTable {
     }
 
     public long addNewPendingTransaction(TransactionsData transaction) {
-        Log.d(BeWiseConstants.LOG_TAG, "addNewPendingTransaction(...");
+        Log.d(this.getClass().toString(), "addNewPendingTransaction(...");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(PENDING_TRANSACTION_ID, transaction.getTransactionID());
@@ -48,7 +48,7 @@ public class PendingTransactionsTable extends TransactionItemsTable {
      * @return
      */
     public TransactionsData getPendingTransactionItem(long transactionID) {
-        Log.d(BeWiseConstants.LOG_TAG, "getPendingTransactionItem(" + transactionID + ", ....");
+        Log.d(this.getClass().toString(), "getPendingTransactionItem(" + transactionID + ", ....");
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(PENDING_TRANSACTIONS_TABLE, PENDING_TRANSACTIONS_TABLE_ARRAY, PENDING_TRANSACTION_ID + "=?",
                 new String[]{String.valueOf(transactionID)}, null, null, null, null);
@@ -72,7 +72,7 @@ public class PendingTransactionsTable extends TransactionItemsTable {
     }
 
     public List<TransactionsData> getAllPendingTransactions() {
-        Log.d(BeWiseConstants.LOG_TAG, "getAllPendingTransactions(...");
+        Log.d(this.getClass().toString(), "getAllPendingTransactions(...");
         List<TransactionsData> transactionsList = new ArrayList<TransactionsData>();
         String selectQuery = "SELECT  * FROM " + PENDING_TRANSACTIONS_TABLE;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -97,7 +97,7 @@ public class PendingTransactionsTable extends TransactionItemsTable {
     }
 
     public int updatePendingTransaction(TransactionsData transaction) {
-        Log.d(BeWiseConstants.LOG_TAG, "updatePendingTransaction(...");
+        Log.d(this.getClass().toString(), "updatePendingTransaction(...");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(PENDING_TRANSACTION_DATE, DateUtilities.getTimestampFromDate(transaction.getStartDate()));
@@ -112,7 +112,7 @@ public class PendingTransactionsTable extends TransactionItemsTable {
     }
 
     public int updatePendingTransaction(String columnName, String currentColumnValue, String newColumnValue) {
-        Log.d(BeWiseConstants.LOG_TAG, "updatePendingTransaction(...");
+        Log.d(this.getClass().toString(), "updatePendingTransaction(...");
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -131,7 +131,7 @@ public class PendingTransactionsTable extends TransactionItemsTable {
      * @param transactionId
      */
     public void deleteSinglePendingTransaction(long transactionId) {
-        Log.d(BeWiseConstants.LOG_TAG, "deleteSinglePendingTransaction(" + transactionId + ")");
+        Log.d(this.getClass().toString(), "deleteSinglePendingTransaction(" + transactionId + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(PENDING_TRANSACTIONS_TABLE, PENDING_TRANSACTION_ID + " = ?", new String[]{String.valueOf(transactionId)});
         db.close();
@@ -149,7 +149,7 @@ public class PendingTransactionsTable extends TransactionItemsTable {
     public List<TransactionsData> searchPendingTransactionsTable(String searchableItems, String startDate, String endDate, double minAmount, double maxAmount,
                                                                  String stringToSearch) {
         // TODO: FIX logging
-        Log.d(BeWiseConstants.LOG_TAG, "searchPendingTransactionsTable(..." + searchableItems + ", " + startDate + ")");
+        Log.d(this.getClass().toString(), "searchPendingTransactionsTable(..." + searchableItems + ", " + startDate + ")");
         List<TransactionsData> transactionsList = new ArrayList<TransactionsData>();
         SQLiteDatabase db = this.getWritableDatabase();
 

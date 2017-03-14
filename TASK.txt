@@ -58,8 +58,11 @@ Functionalities to be implemented:
 * (--Done--) Change background of title
 * Graph of budgets and compare it (Medium)
 * (High)(FIXED) When a budget is deleted, all the transactions taking reference of that buget will be deleted.
-* (--Done--)(FIXED)(Crash) When all the budgets are deleted, the app crash. Index array out of bound.
-* (Crash) When a transaction is deleted budgets are deleted, the app crash. Index array out of bound.
+* (--Done--)(FIXED)(Crash) When all the budgets are deleted, the app crash. Index array out of bound. 
+	Root Cause Analysis: Reason was at the end of delete transaction we were repopulating the list and view which leads to indexes been messed up. After removing the repopulation, things went fine.
+* (--Done--)(FIXED)(Crash) When a transaction is deleted budgets are deleted, the app crash. Index array out of bound. 
+	Root Cause Analysis: Reason was delete action was performed on the incorrect view. Instead of deleteing a transaction in budget, app was deleting the budget itself. 
+	Side-Fix: After deleting the transactions, view should remain in the transactions in budget view.
 
 
 - Search: (High)

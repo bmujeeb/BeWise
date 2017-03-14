@@ -62,7 +62,9 @@ public class BudgetFragment extends CustomListFragment {
 
     private Context _context;
 
-    BudgetTable _budgetTable;
+    private BudgetTable _budgetTable;
+
+    private int _selectedIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,21 +108,35 @@ public class BudgetFragment extends CustomListFragment {
         _deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BudgetTable budgetTable = new BudgetTable(_context);
-                TransactionsTable transactionsTable = new TransactionsTable(_context);
-                RecurrenceTable recurrenceTable = new RecurrenceTable(_context);
-                PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(_context);
-
-                Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
-                while (iterator.hasNext()) {
-                    Map.Entry<Integer, Boolean> item = iterator.next();
-                    String budgetName = _budgetsList.get(item.getKey()).getBudgetName();
-                    budgetTable.deleteBudget(budgetName);
-                    transactionsTable.updateTransaction("budget", budgetName, null);
-                    recurrenceTable.updateRecurringTransaction("budget", budgetName, null);
-                    pendingTransactionsTable.updatePendingTransaction("budget", budgetName, null);
+                // FIXED ISSUE: If the transactions in a budget are displayed and deleted, it crashes the application.
+                // Reason been, delete action is made on budgets list, not on the transactions in a budget.
+                if (_transactionsListView == null) {
+                    BudgetTable budgetTable = new BudgetTable(_context);
+                    TransactionsTable transactionsTable = new TransactionsTable(_context);
+                    RecurrenceTable recurrenceTable = new RecurrenceTable(_context);
+                    PendingTransactionsTable pendingTransactionsTable = new PendingTransactionsTable(_context);
+                    Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Map.Entry<Integer, Boolean> item = iterator.next();
+                        String budgetName = _budgetsList.get(item.getKey()).getBudgetName();
+                        budgetTable.deleteBudget(budgetName);
+                        transactionsTable.updateTransaction("budget", budgetName, null);
+                        recurrenceTable.updateRecurringTransaction("budget", budgetName, null);
+                        pendingTransactionsTable.updatePendingTransaction("budget", budgetName, null);
+                    }
+                    updateActivity();
+                } else {
+                    // Otherwise remove reference of the budget from the selected transactions.
+                    TransactionsTable transactionsTable = new TransactionsTable(_context);
+                    Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Map.Entry<Integer, Boolean> item = iterator.next();
+                        TransactionsData transaction = _budgetTransaction.get(item.getKey());
+                        transaction.setBudget(null);
+                        transactionsTable.updateTransaction(transaction);
+                    }
+                    updateBudgetTransactionsActivity(_selectedIndex);
                 }
-                updateActivity();
             }
         });
         _deleteButton.setEnabled(false); // initial state
@@ -155,21 +171,11 @@ public class BudgetFragment extends CustomListFragment {
         Log.d(this.getClass().toString(), "onListItemClick(ListView l, View v, int position, long id) - Budget item selected.");
         super.onListItemClick(l, v, position, id);
 
+        _selectedIndex = position;
+
         if (_transactionsListView == null) {
             // A budget is selected and items related to the budget are available
-            String budgetName = _budgetsList.get(position).getBudgetName();
-            String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
-            TransactionsTable transactionsTable = new TransactionsTable(_context);
-
-            _budgetTransaction = transactionsTable.getTransactionsInBudget(budgetName,
-                    budRecurringPeriod, _budgetsList.get(position).getBudgetDate(),
-                    DateUtilities.getCurrentDate());
-
-            _transactionsListView = new TransactionsListView(getActivity(), R.layout.transactions_out, _budgetTransaction, this);
-
-            setListAdapter(_transactionsListView);
-            _addBudgetButton.setEnabled(false);
-            _addBudgetButton.setVisibility(View.GONE);
+            updateBudgetTransactionsActivity(position);
         } else {
             // Otherwise open the TransactionDetailsDialog and show the transaction detail
             FragmentManager fm = getFragmentManager();
@@ -192,13 +198,33 @@ public class BudgetFragment extends CustomListFragment {
     private void updateActivity() {
         Log.d(this.getClass().toString(), "updateActivity()");
         // TODO: calculate the budget utilization here and send it to listview
-        Log.d(this.getClass().toString(), "updateActivity(): Budget ListView repopulated.");
         _checkState = new HashMap<Integer, Boolean>();
         _budgetsList = _budgetTable.getAllBudgets();
         _budgetListView = new BudgetListView(_context, R.layout.budget_out, _budgetsList,
                 this);
         setListAdapter(_budgetListView);
+    }
 
+    /**
+     *
+     * @param position
+     */
+    private void updateBudgetTransactionsActivity(int position){
+        // A budget is selected and items related to the budget are available
+        Log.d(this.getClass().toString(), "updateBudgetTransactionsActivity( " + position +" )");
+        String budgetName = _budgetsList.get(position).getBudgetName();
+        String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
+        TransactionsTable transactionsTable = new TransactionsTable(_context);
+
+        _budgetTransaction = transactionsTable.getTransactionsInBudget(budgetName,
+                budRecurringPeriod, _budgetsList.get(position).getBudgetDate(),
+                DateUtilities.getCurrentDate());
+
+        _transactionsListView = new TransactionsListView(getActivity(), R.layout.transactions_out, _budgetTransaction, this);
+
+        setListAdapter(_transactionsListView);
+        _addBudgetButton.setEnabled(false);
+        _addBudgetButton.setVisibility(View.GONE);
     }
 
     /**

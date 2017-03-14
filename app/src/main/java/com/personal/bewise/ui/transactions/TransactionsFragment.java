@@ -224,7 +224,7 @@ public class TransactionsFragment extends CustomListFragment {
      */
     @Override
     public void setCheckBoxSelections(int itemId, boolean checkedState) {
-        Log.d(BeWiseConstants.LOG_TAG, "setCheckBoxSelections( "+ itemId+", " +checkedState+")");
+        Log.d(this.getClass().toString(), "setCheckBoxSelections( "+ itemId+", " +checkedState+")");
         _selectedItem = itemId;
         if (checkedState) {
             _checkState.put(itemId, checkedState);

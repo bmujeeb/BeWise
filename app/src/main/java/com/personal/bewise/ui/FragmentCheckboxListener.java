@@ -18,7 +18,7 @@ public class FragmentCheckboxListener implements CompoundButton.OnCheckedChangeL
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Log.d(BeWiseConstants.LOG_TAG, "onCheckedChanged(...");
+        Log.d(this.getClass().toString(), "onCheckedChanged(...");
         parent.setCheckBoxSelections(itemId, isChecked);
     }
 
