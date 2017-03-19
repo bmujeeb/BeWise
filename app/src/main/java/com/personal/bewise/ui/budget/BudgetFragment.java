@@ -75,6 +75,7 @@ public class BudgetFragment extends CustomListFragment {
         _addBudgetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(this.getClass().toString(), "onClick: Add budget button clicked");
                 FragmentManager fm = getFragmentManager();
                 BudgetDialog editNameDialog = new BudgetDialog();
                 Bundle bundle = new Bundle();
@@ -91,6 +92,7 @@ public class BudgetFragment extends CustomListFragment {
         _editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(this.getClass().toString(), "onClick: Edit budget button clicked");
                 FragmentManager fm = getFragmentManager();
                 BudgetDialog editNameDialog = new BudgetDialog();
                 Bundle bundle = new Bundle();
@@ -108,9 +110,11 @@ public class BudgetFragment extends CustomListFragment {
         _deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(this.getClass().toString(), "onClick: Delete budget button clicked");
                 // FIXED ISSUE: If the transactions in a budget are displayed and deleted, it crashes the application.
                 // Reason been, delete action is made on budgets list, not on the transactions in a budget.
                 if (_transactionsListView == null) {
+                    Log.d(this.getClass().toString(), "Selected budget(s) will be deleted.");
                     BudgetTable budgetTable = new BudgetTable(_context);
                     TransactionsTable transactionsTable = new TransactionsTable(_context);
                     RecurrenceTable recurrenceTable = new RecurrenceTable(_context);
@@ -126,6 +130,7 @@ public class BudgetFragment extends CustomListFragment {
                     }
                     updateActivity();
                 } else {
+                    Log.d(this.getClass().toString(), "Selected transation(s) associated with a budget will be de-referenced from the budget..");
                     // Otherwise remove reference of the budget from the selected transactions.
                     TransactionsTable transactionsTable = new TransactionsTable(_context);
                     Iterator<Map.Entry<Integer, Boolean>> iterator = _checkState.entrySet().iterator();
@@ -147,6 +152,9 @@ public class BudgetFragment extends CustomListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.d(this.getClass().toString(), "onActivityCreated(Bundle...: Activity created.");
         super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState == null) {
+            Log.d(this.getClass().toString(), "onActivityCreated: savedInstanceState is null");
+        }
         _context = getActivity();
         _budgetTable = new BudgetTable(_context);
         updateActivity();
@@ -154,16 +162,16 @@ public class BudgetFragment extends CustomListFragment {
 
     @Override
     public void onSaveInstanceState(Bundle savedState) {
+        Log.d(this.getClass().toString(), "onSaveInstanceState(.....");
         super.onSaveInstanceState(savedState);
+        // savedState.putSerializable("current.view", _transactionsListView);
     }
 
+
     @Override
-    public void onCreate (Bundle savedState) {
+    public void onCreate(Bundle savedState) {
         // Restore the view on rotation change
         super.onCreate(savedState);
-        if (savedState != null) {
-
-        }
     }
 
     @Override
@@ -175,9 +183,11 @@ public class BudgetFragment extends CustomListFragment {
 
         if (_transactionsListView == null) {
             // A budget is selected and items related to the budget are available
+            Log.d(this.getClass().toString(), "onListItemClick: Open the transactions associated with a budget.");
             updateBudgetTransactionsActivity(position);
         } else {
             // Otherwise open the TransactionDetailsDialog and show the transaction detail
+            Log.d(this.getClass().toString(), "onListItemClick: Budget transactions listview is visible and transation details dialog will appear.");
             FragmentManager fm = getFragmentManager();
             TransactionsData transaction = _budgetTransaction.get(position);
             Bundle bundle = new Bundle();
@@ -206,12 +216,11 @@ public class BudgetFragment extends CustomListFragment {
     }
 
     /**
-     *
      * @param position
      */
-    private void updateBudgetTransactionsActivity(int position){
+    private void updateBudgetTransactionsActivity(int position) {
         // A budget is selected and items related to the budget are available
-        Log.d(this.getClass().toString(), "updateBudgetTransactionsActivity( " + position +" )");
+        Log.d(this.getClass().toString(), "updateBudgetTransactionsActivity( " + position + " )");
         String budgetName = _budgetsList.get(position).getBudgetName();
         String budRecurringPeriod = _budgetsList.get(position).getBudgetRecurrencePeriod();
         TransactionsTable transactionsTable = new TransactionsTable(_context);
