@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(this.getClass().toString(), "onCreate:...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -54,7 +56,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-
+        Log.d(this.getClass().toString(), "onNavigationDrawerItemSelected:...");
         Fragment fragment = null;
 
         switch (position) {
@@ -94,6 +96,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     }
 
     public void onSectionAttached(int number) {
+        Log.d(this.getClass().toString(), "onSectionAttached:...");
         switch (number) {
             case 1:
                 mTitle = getString(R.string.label_overview);
@@ -123,6 +126,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     }
 
     public void restoreActionBar() {
+        Log.d(this.getClass().toString(), "restoreActionBar:...");
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
@@ -131,6 +135,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(this.getClass().toString(), "onCreateOptionsMenu:...");
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
@@ -144,6 +149,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(this.getClass().toString(), "onOptionsItemSelected:...");
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -161,12 +167,14 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     @Override
     public void onBackPressed() {
+        Log.d(this.getClass().toString(), "onBackPressed:...");
         FragmentManager fm = getFragmentManager();
         fm.popBackStack();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(this.getClass().toString(), "onConfigurationChanged:...");
         super.onConfigurationChanged(newConfig);
     }
 
@@ -180,6 +188,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
+            Log.d(this.getClass().toString(), "PlaceholderFragment:...");
         }
 
         /**
@@ -195,12 +204,14 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            Log.d(this.getClass().toString(), "onCreateView:...");
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
 
         @Override
         public void onAttach(Activity activity) {
+            Log.d(this.getClass().toString(), "onAttach:...");
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
         }

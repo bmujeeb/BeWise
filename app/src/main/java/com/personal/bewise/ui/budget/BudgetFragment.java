@@ -28,6 +28,7 @@ import com.personal.bewise.utils.DateUtilities;
 import com.personal.bewise.utils.TransactionDetailsMode;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -55,16 +56,35 @@ public class BudgetFragment extends CustomListFragment {
     // Default listview when the budget fragment is created
     private BudgetListView _budgetListView;
 
-    // listview containing transactions in a listview
+    /**
+     * listview containing transactions in a listview
+     */
     private TransactionsListView _transactionsListView;
 
-    private int _selectedItem = 0;
+    /**
+     *
+     */
+    private int _selectedCheckboxItem = 0;
 
+    /**
+     *
+     */
     private Context _context;
 
+    /**
+     *
+     */
     private BudgetTable _budgetTable;
 
+    /**
+     *
+     */
     private int _selectedIndex;
+
+    /**
+     *
+     */
+    private String _currentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,7 +119,7 @@ public class BudgetFragment extends CustomListFragment {
                 bundle.putSerializable("HANDLER", new DialogDismisselHandler());
                 bundle.putSerializable("DIALOG_TITLE", "Edit Budget");
                 bundle.putSerializable("DIALOG_MODE", "EDIT");
-                bundle.putSerializable("BUDGET", _budgetsList.get(_selectedItem));
+                bundle.putSerializable("BUDGET", _budgetsList.get(_selectedCheckboxItem));
                 editNameDialog.setArguments(bundle);
                 editNameDialog.show(fm, "add_budget_dialog");
             }
@@ -145,33 +165,55 @@ public class BudgetFragment extends CustomListFragment {
             }
         });
         _deleteButton.setEnabled(false); // initial state
+
+        if (savedInstanceState != null) {
+            //TODO: Find and fix with a better solution
+            Log.d(this.getClass().toString(), "onCreateView: Fragmnent configuration changed and saved on view recreate or orientation change.");
+            _selectedIndex = savedInstanceState.getInt("SELECTED_INDEX");
+            _currentView = savedInstanceState.getString("CURRENT_VIEW");
+        }
         return view;
     }
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.d(this.getClass().toString(), "onActivityCreated(Bundle...: Activity created.");
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState == null) {
-            Log.d(this.getClass().toString(), "onActivityCreated: savedInstanceState is null");
-        }
         _context = getActivity();
         _budgetTable = new BudgetTable(_context);
-        updateActivity();
+        _checkState = new HashMap<Integer, Boolean>();
+        _budgetsList = _budgetTable.getAllBudgets();
+        if (null != _currentView && _currentView.equalsIgnoreCase("TRANSACTION_LIST_VIEW")) {
+            updateBudgetTransactionsActivity(_selectedIndex);
+        } else {
+            updateActivity();
+        }
     }
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
-    public void onSaveInstanceState(Bundle savedState) {
+    public void onSaveInstanceState(Bundle savedInstanceState) {
         Log.d(this.getClass().toString(), "onSaveInstanceState(.....");
-        super.onSaveInstanceState(savedState);
-        // savedState.putSerializable("current.view", _transactionsListView);
+        super.onSaveInstanceState(savedInstanceState);
+        if (_budgetTransaction != null) {
+            savedInstanceState.putInt("SELECTED_INDEX", _selectedIndex);
+            savedInstanceState.putString("CURRENT_VIEW", "TRANSACTION_LIST_VIEW");
+        }
     }
 
-
+    /**
+     * @param savedInstanceState
+     */
     @Override
-    public void onCreate(Bundle savedState) {
+    public void onCreate(Bundle savedInstanceState) {
         // Restore the view on rotation change
-        super.onCreate(savedState);
+        Log.d(this.getClass().toString(), "onCreate(.....");
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -187,7 +229,7 @@ public class BudgetFragment extends CustomListFragment {
             updateBudgetTransactionsActivity(position);
         } else {
             // Otherwise open the TransactionDetailsDialog and show the transaction detail
-            Log.d(this.getClass().toString(), "onListItemClick: Budget transactions listview is visible and transation details dialog will appear.");
+            Log.d(this.getClass().toString(), "onListItemClick: Budget transactions listview is visible and transaction details dialog will appear.");
             FragmentManager fm = getFragmentManager();
             TransactionsData transaction = _budgetTransaction.get(position);
             Bundle bundle = new Bundle();
@@ -206,12 +248,10 @@ public class BudgetFragment extends CustomListFragment {
     }
 
     private void updateActivity() {
-        Log.d(this.getClass().toString(), "updateActivity()");
+        Log.d(this.getClass().toString(), "updateActivity(): Populate the budgets view with all available budgets.");
         // TODO: calculate the budget utilization here and send it to listview
-        _checkState = new HashMap<Integer, Boolean>();
-        _budgetsList = _budgetTable.getAllBudgets();
-        _budgetListView = new BudgetListView(_context, R.layout.budget_out, _budgetsList,
-                this);
+
+        _budgetListView = new BudgetListView(_context, R.layout.budget_out, _budgetsList, this);
         setListAdapter(_budgetListView);
     }
 
@@ -241,7 +281,7 @@ public class BudgetFragment extends CustomListFragment {
      * @param checkedState
      */
     public void setCheckBoxSelections(int itemId, boolean checkedState) {
-        _selectedItem = itemId;
+        _selectedCheckboxItem = itemId;
         if (checkedState) {
             _checkState.put(itemId, true);
         } else {
@@ -262,8 +302,9 @@ public class BudgetFragment extends CustomListFragment {
 
     @Override
     public void onResume() {
-        super.onResume();
         Log.d(this.getClass().toString(), "onResume()");
+        super.onResume();
+        // Back button from budget transaction listview to budgets listview
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener(new View.OnKeyListener() {
@@ -272,8 +313,7 @@ public class BudgetFragment extends CustomListFragment {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     Log.d(this.getClass().toString(), "onResume(): Back button pressed.");
                     if (_transactionsListView != null) {
-                        // move to budget fragment
-                        //TODO: check if setting the following variables is going to make any difference?
+                        Log.d(this.getClass().toString(), "onResume(): Back button from budget transactions to budgets.");
                         _transactionsListView = null;
                         _budgetTransaction = null;
                         updateActivity();

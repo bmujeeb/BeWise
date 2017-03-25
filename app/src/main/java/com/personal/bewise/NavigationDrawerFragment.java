@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,6 +68,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(this.getClass().toString(), "onCreate:...");
         super.onCreate(savedInstanceState);
 
         // Read in the flag indicating whether or not the user has demonstrated
@@ -86,6 +88,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.d(this.getClass().toString(), "onActivityCreated:...");
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of
         // actions in the action bar.
@@ -94,6 +97,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(this.getClass().toString(), "onCreateView:...");
         mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -114,6 +118,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public boolean isDrawerOpen() {
+        Log.d(this.getClass().toString(), "isDrawerOpen:...");
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
 
@@ -124,6 +129,7 @@ public class NavigationDrawerFragment extends Fragment {
      * @param drawerLayout The DrawerLayout containing this fragment's UI.
      */
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+        Log.d(this.getClass().toString(), "setUp:...");
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
 
@@ -200,6 +206,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
+        Log.d(this.getClass().toString(), "selectItem:...");
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
@@ -214,6 +221,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
+        Log.d(this.getClass().toString(), "onAttach:...");
         super.onAttach(activity);
         try {
             mCallbacks = (NavigationDrawerCallbacks) activity;
@@ -224,18 +232,21 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        Log.d(this.getClass().toString(), "onDetach:...");
         super.onDetach();
         mCallbacks = null;
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        Log.d(this.getClass().toString(), "onSaveInstanceState:...");
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(this.getClass().toString(), "onConfigurationChanged:...");
         super.onConfigurationChanged(newConfig);
         // Forward the new configuration the drawer toggle component.
         mDrawerToggle.onConfigurationChanged(newConfig);
@@ -243,6 +254,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d(this.getClass().toString(), "onCreateOptionsMenu:...");
         // If the drawer is open, show the global app actions in the action bar.
         // See also
         // showGlobalContextActionBar, which controls the top-left area of the
@@ -256,6 +268,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(this.getClass().toString(), "onOptionsItemSelected:...");
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -274,6 +287,7 @@ public class NavigationDrawerFragment extends Fragment {
      * Per the navigation drawer design guidelines, updates the action bar to show the global app 'context', rather than just what's in the current screen.
      */
     private void showGlobalContextActionBar() {
+        Log.d(this.getClass().toString(), "showGlobalContextActionBar:...");
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -281,6 +295,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private ActionBar getActionBar() {
+        Log.d(this.getClass().toString(), "getActionBar:...");
         return getActivity().getActionBar();
     }
 
